@@ -48,16 +48,34 @@ class master {
         return array('error' => $errStatus, 'recordsTotal' => $recordRows, 'recordsFiltered' => $recordsFiltered, 'data' => $dataRes);
     }
 
+    private static function responseDataSelect($dataRes = '') {
+        return array('data' => $dataRes);        
+    }
+
     public static function returnJson($data)
     {
-        $CI =& get_instance();
-        $response = self::responseData(self::status($data->num_rows()), $data->result_object(), $data->num_rows(), $data->num_rows());
+        $response = self::responseData(self::status($data->num_rows()), $data->result(), $data->num_rows(), $data->num_rows());
         
         if(!empty($data)) {
             return self::setResponse($response, 200, self::$_json);
         } else {
             return self::setResponse($response, 500, self::$_json);
         }
+    }
+
+    public static function returnJsonTable($data)
+    {
+        $response = self::responseDataTable(self::status($data->num_rows()), $data->result(), $data->num_rows(), $data->num_rows());
+        
+        if(!empty($data)) {
+            return self::setResponse($response, 200, self::$_json);
+        } else {
+            return self::setResponse($response, 500, self::$_json);
+        }
+    }
+
+    private static function responseDataTable($errStatus = '', $dataRes = '', $recordRows = '', $recordsFiltered = '') {
+        return array('recordsTotal' => $recordRows, 'recordsFiltered' => $recordsFiltered, 'data' => $dataRes);
     }
 
     public static function setResponse($response = '', $code = '', $type_data = '')
@@ -75,7 +93,7 @@ class master {
         $CI->load->model(array('master_model'));
 
         $data = $CI->master_model->getAll($table);
-        return self::returnJson($data);
+        return self::returnJsonTable($data);
     }
 
     public static function saveData($data = array(), $table = '')
@@ -98,6 +116,29 @@ class master {
         $response           = self::responseData(!$status_deleted, self::statusDeleted($status_deleted));
 
         return self::setResponse($response, self::statusCode($status_deleted), self::$_json);
+    }
+
+    public static function getAllData($table = '')
+    {
+        $CI =& get_instance();
+        $CI->load->model(array('master_model'));
+
+        $data       = $CI->master_model->getAll($table);
+        $response   = self::responseData(self::status($data->num_rows()),$data->result(), '', '');
+
+        return self::setResponse($response, self::statusCode($data), self::$_json);
+    }
+
+    public static function getDataSelect($table = '', $condition = array())
+    {
+        $CI =& get_instance();
+        $CI->load->model(array('master_model'));
+
+        $data       = $CI->master_model->getLike($table, $condition);
+        $response   = self::responseDataSelect($data->result());
+
+        return self::setResponse($response, self::statusCode($data), self::$_json);
+        // return $response;
     }
 
     public static function getDataById($data = array(), $table = '')

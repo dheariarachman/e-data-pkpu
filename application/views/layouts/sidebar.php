@@ -29,15 +29,15 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-cog"></i>
-    <span>Gudang</span>
-  </a>
+<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+  <i class="fas fa-fw fa-cog"></i>
+  <span>Inventory</span>
+</a>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Custom Components:</h6>
-      <a class="collapse-item" href="buttons.html">Buttons</a>
-      <a class="collapse-item" href="cards.html">Cards</a>
+      <!-- <h6 class="collapse-header">Custom Components:</h6> -->
+      <a class="collapse-item" href="buttons.html">Gudang</a>
+      <a class="collapse-item" href="cards.html">RIG</a>
     </div>
   </div>
 </li>
@@ -50,9 +50,11 @@
   </a>
   <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-      <a class="collapse-item" href="<?php echo base_url('master-status/index'); ?>">Master Status</a>
-      <a class="collapse-item" href="<?php echo base_url('master-user/index'); ?>">Master User</a>
+      <a class="collapse-item" href="<?php echo base_url('master-status/index'); ?>">Master Posisi</a>
+      <a class="collapse-item" href="<?php echo base_url('master-jenis-item/index'); ?>">Master Tipe Barang</a>
+      <a class="collapse-item" href="<?php echo base_url('master-barang/index'); ?>">Master Barang</a>
+      <a class="collapse-item" href="<?php echo base_url('master-status-barang/index'); ?>">Master Status Barang</a>
+      <a class="collapse-item" href="<?php echo base_url('master-rig/index'); ?>">Master RIG</a>
     </div>
   </div>
 </li>

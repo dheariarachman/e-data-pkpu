@@ -53,5 +53,10 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['master-status/index'] = 'mstatus/index';
-$route['master-user/index'] = 'muser/index';
+$route['master-status/index']           = 'mstatus/index';
+$route['master-user/index']             = 'm_user/index';
+$route['master-jenis-item/index']       = 'M_Jenisitem/index';
+$route['master-barang/index']           = 'M_Barang/index';
+$route['master-barang/index']           = 'M_Barang/index';
+$route['master-status-barang/index']    = 'M_Status_barang/index';
+$route['master-rig/index']              = 'M_Rig/index';

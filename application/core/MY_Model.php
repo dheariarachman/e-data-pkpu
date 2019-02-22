@@ -20,6 +20,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             return $this->db->get();
         }
 
+        public function getLike($table = '', $condition = array())
+        {
+            $this->db->select('*');
+            $this->db->from($table);
+            if(!empty($condition)) {
+                $this->db->like($condition);
+            }
+            return $this->db->get();
+        }
+
         public function save($data = array(), $table = '')
         {
             return $this->db->insert($table, $data);

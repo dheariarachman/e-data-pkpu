@@ -1,13 +1,12 @@
 <?php
 
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mstatus extends MY_Controller {
+class M_Status_barang extends MY_Controller {
 
-    private $_table     = 'm_status';
-    private $_module    = 'mstatus';
-    private $_title     = 'Master Posisi';
+    private $_table     = 'm_status_barang';
+    private $_module    = 'M_Status_barang';
+    private $_title     = 'Master Status Barang';
     
     public function __construct()
     {
@@ -39,8 +38,8 @@ class Mstatus extends MY_Controller {
 
     public function saveData()
     {        
-        $this->form_validation->set_rules('id_status', 'ID Status', 'required|is_unique[m_status.id_status]');
-        $this->form_validation->set_rules('name_status', 'Nama Status', 'trim|required');
+        $this->form_validation->set_rules('id_status_barang', 'ID Tipe', 'required|is_unique['.$this->_table.'.id_status_barang]');
+        $this->form_validation->set_rules('name_status_barang', 'Nama Status Barang', 'trim|required');
         
         if ($this->form_validation->run() == TRUE ) {
             $data = $this->input->post();
@@ -51,21 +50,22 @@ class Mstatus extends MY_Controller {
     public function deleteData()
     {
         $data = $this->input->post('id');
-        return master::deleteData(array('id_status' => $data), $this->_table);
+        return master::deleteData(array('id_status_barang' => $data), $this->_table);
     }
 
     public function editData()
     {
         $data   = $this->input->post('id');
-        return master::getDataById(array('id_status' => $data), $this->_table);
+        return master::getDataById(array('id_status_barang' => $data), $this->_table);
     }
 
     public function updateData()
     {
-        $id_status      = $this->input->post('id_status');
-        $nama_status    = $this->input->post('name_status');
-        return master::updateData(array('name_status' => $nama_status), array('id_status' => $id_status), $this->_table);
+        $id_status_barang      = $this->input->post('id_status_barang');
+        $name_status_barang    = $this->input->post('name_status_barang');
+        return master::updateData(array('name_status_barang' => $name_status_barang), array('id_status_barang' => $id_status_barang), $this->_table);
     }
+
 }
 
-/* End of file mstatus.php */
+/* End of file M_Jenisitem.php */

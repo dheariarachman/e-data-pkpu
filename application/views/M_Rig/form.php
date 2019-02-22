@@ -11,12 +11,12 @@
 			<div class="modal-body">
 				<form id="form_status">
 					<div class="form-group">
-						<input type="text" class="form-control" id="id_status" aria-describedby="id_status_help" placeholder="Masukan ID Status"
-						 name="id_status" autocomplete="off">
-						<small id="id_status_help" class="form-text text-muted">Setelah Dibuat, ID Tidak bisa diubah.</small>
+						<input type="text" class="form-control" id="id_rig" aria-describedby="id_rig_help" placeholder="Masukan ID RIG"
+						 name="id_rig" autocomplete="off">
+						<small id="id_rig_help" class="form-text text-muted">Setelah Dibuat, ID Tidak bisa diubah.</small>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="name_status" placeholder="Nama Status" name="name_status" autocomplete="off">
+						<input type="text" class="form-control" id="name_rig" placeholder="Nama RIG" name="name_rig" autocomplete="off">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

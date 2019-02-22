@@ -1,13 +1,12 @@
 <?php
 
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mstatus extends MY_Controller {
+class M_Jenisitem extends MY_Controller {
 
-    private $_table     = 'm_status';
-    private $_module    = 'mstatus';
-    private $_title     = 'Master Posisi';
+    private $_table     = 'm_type';
+    private $_module    = 'M_Jenisitem';
+    private $_title     = 'Master Jenis Item';
     
     public function __construct()
     {
@@ -39,8 +38,8 @@ class Mstatus extends MY_Controller {
 
     public function saveData()
     {        
-        $this->form_validation->set_rules('id_status', 'ID Status', 'required|is_unique[m_status.id_status]');
-        $this->form_validation->set_rules('name_status', 'Nama Status', 'trim|required');
+        $this->form_validation->set_rules('id_type', 'ID Tipe', 'required|is_unique['.$this->_table.'.id_type]');
+        $this->form_validation->set_rules('name_type', 'Tipe', 'trim|required');
         
         if ($this->form_validation->run() == TRUE ) {
             $data = $this->input->post();
@@ -51,21 +50,22 @@ class Mstatus extends MY_Controller {
     public function deleteData()
     {
         $data = $this->input->post('id');
-        return master::deleteData(array('id_status' => $data), $this->_table);
+        return master::deleteData(array('id_type' => $data), $this->_table);
     }
 
     public function editData()
     {
         $data   = $this->input->post('id');
-        return master::getDataById(array('id_status' => $data), $this->_table);
+        return master::getDataById(array('id_type' => $data), $this->_table);
     }
 
     public function updateData()
     {
-        $id_status      = $this->input->post('id_status');
-        $nama_status    = $this->input->post('name_status');
-        return master::updateData(array('name_status' => $nama_status), array('id_status' => $id_status), $this->_table);
+        $id_status      = $this->input->post('id_type');
+        $nama_status    = $this->input->post('name_type');
+        return master::updateData(array('name_type' => $nama_status), array('id_type' => $id_status), $this->_table);
     }
+
 }
 
-/* End of file mstatus.php */
+/* End of file M_Jenisitem.php */

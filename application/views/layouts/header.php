@@ -20,11 +20,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url() ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- Jquery.ui -->
+  <link href="<?php echo base_url() ?>/assets/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>/assets/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet">
+
   <!-- Jquery Confirm -->
   <link href="<?php echo base_url() ?>/assets/css/jquery-confirm.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
   <link href="<?php echo base_url() ?>/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <!-- Select2 -->
+  <link href="<?php echo base_url() ?>/assets/css/select2/select2.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>/assets/css/select2/select2.min.css.4.0.0.css" rel="stylesheet">
+
 
 </head>
 
