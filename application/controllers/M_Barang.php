@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Barang extends MY_Controller {
 
-    private $_table     = 'm_barang';
-    private $_module    = 'M_Barang';
-    private $_title     = 'Master Barang';
-    private $_m_type    = 'm_type';
-    private $_m_status_barang    = 'm_status_barang';
-    private $_m_rig     = 'm_rig';
+    private $_table         = 'm_barang';
+    private $_module        = 'M_Barang';
+    private $_title         = 'Master Barang';
+
+    private $_v_m_barang    = 'v_m_barang';
+    private $_v_m_full_barang    = 'v_m_full_barang';
     
     public function __construct()
     {
@@ -31,7 +31,7 @@ class M_Barang extends MY_Controller {
             'update'        => site_url( $this->_module . '/updateData'),
             'typeSource'    => site_url( $this->_module . '/getDataTypeBarang'),
             'statusSource'  => site_url( $this->_module . '/getDataStatusBarang'),
-            'rigSource'     => site_url( $this->_module . '/getDataRig')
+            'statusLokSource'  => site_url( $this->_module . '/getDataStatusPosisi'),
         );
 
         $this->load->view('welcome_message', $data);        
@@ -39,25 +39,7 @@ class M_Barang extends MY_Controller {
 
     public function getData()
     {
-        return master::responseGetData($this->_table);
-    }
-
-    public function getDataTypeBarang()
-    {
-        $params = $this->input->get('q');
-        return master::getDataSelect($this->_m_type, array('name_type' => $params));
-    }
-
-    public function getDataStatusBarang()
-    {
-        $params = $this->input->get('q');
-        return master::getDataSelect($this->_m_status_barang, array('name_status_barang' => $params));
-    }
-
-    public function getDataRig()
-    {
-        $params = $this->input->get('q');
-        return master::getDataSelect($this->_m_rig, array('name_rig' => $params));
+        return master::responseGetData($this->_v_m_barang);
     }
 
     public function saveData()
@@ -68,8 +50,20 @@ class M_Barang extends MY_Controller {
         $this->form_validation->set_rules('stock_in', 'Tanggal Masuk', 'required');
         $this->form_validation->set_rules('id_status_barang', 'Status Barang', 'required');
 
+        // Change Format Date in php 
+        // from d-m-Y to Y-m-d
+        $stockIn        = DateTime::createFromFormat('d-m-Y', $this->input->post('stock_in'));
+        $stockInFormat  = $stockIn->format('Y-m-d');
+
+        // Get data from POST and unset field stock_in ( date )
+        $data = $this->input->post();
+        unset($data['stock_in']);
+
+        // Insert field stock_in after re-format
+        $data['stock_in'] = $stockInFormat;
+        $data['inputed_by'] = '99';
+
         if ($this->form_validation->run() !== FALSE ) {
-            $data = $this->input->post();
             return master::saveData($data, $this->_table);
         }
     }
@@ -83,18 +77,23 @@ class M_Barang extends MY_Controller {
     public function editData()
     {
         $data   = $this->input->post('id');
-        return master::getDataById(array('id_barang' => $data), $this->_table);
+        return master::getDataById(array('id_barang' => $data), $this->_v_m_full_barang);
     }
 
     public function updateData()
     {
         $id = $this->input->post('id');
+
+        $stockIn        = DateTime::createFromFormat('d-m-Y', $this->input->post('stock_in'));
+        $stockInFormat  = $stockIn->format('Y-m-d');
+
         $data = array(
             'id_type'           => $this->input->post('id_type'),
             'name_barang'       => $this->input->post('name_barang'),
             's_n'               => $this->input->post('s_n'),
-            'stock_in'          => $this->input->post('stock_in'),
+            'stock_in'          => $stockInFormat,
             'id_status_barang'  => $this->input->post('id_status_barang'),
+            'id_status'         => $this->input->post('id_status'),
         );
         
         return master::updateData($data, array('id_barang' => $id), $this->_table);

@@ -14,7 +14,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-  <a class="nav-link" href="<?php echo base_url(); ?>">
+  <a class="nav-link" href="<?php echo base_url('/'); ?>">
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Dashboard</span></a>
 </li>
@@ -37,7 +37,7 @@
     <div class="bg-white py-2 collapse-inner rounded">
       <!-- <h6 class="collapse-header">Custom Components:</h6> -->
       <a class="collapse-item" href="buttons.html">Gudang</a>
-      <a class="collapse-item" href="cards.html">RIG</a>
+      <a class="collapse-item" href="<?php echo base_url('master-rig-trans/index'); ?>">RIG</a>
     </div>
   </div>
 </li>

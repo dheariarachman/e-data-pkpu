@@ -60,3 +60,5 @@ $route['master-barang/index']           = 'M_Barang/index';
 $route['master-barang/index']           = 'M_Barang/index';
 $route['master-status-barang/index']    = 'M_Status_barang/index';
 $route['master-rig/index']              = 'M_Rig/index';
+$route['master-rig-trans/index']        = 'T_Rig/index';
+$route['master-rig-trans/index/(:any)'] = 'T_Rig/index/$1';

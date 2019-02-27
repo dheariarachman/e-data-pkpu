@@ -25,11 +25,11 @@
                     <div class="form-group">
 						<input type="text" class="form-control" id="stock_in" placeholder="Tanggal Masuk" name="stock_in" autocomplete="off">
 					</div>
-					<div class="form-group">
-						<select style="width: 100%;" class="form-control" name="id_rig" id="id_rig" autocomplete="off"></select>
-                    </div>
                     <div class="form-group">
 						<select style="width: 100%;" class="form-control" name="id_status_barang" id="id_status_barang" autocomplete="off"></select>
+					</div>
+					<div class="form-group">
+						<select style="width: 100%;" class="form-control" name="id_status" id="id_status" autocomplete="off"></select>
                     </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

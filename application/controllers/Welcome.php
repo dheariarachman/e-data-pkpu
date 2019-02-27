@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends MY_Controller {
 
+	private $_m_rig 	= 'm_rig';
+	private $_module 	= 'Welcome';
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -21,9 +24,15 @@ class Welcome extends MY_Controller {
 	public function index()
 	{
 		$data = array(
-			'content'	=> 'layouts/dashboard',
+			'content'		=> 'layouts/dashboard',
+			'rig_result'	=> site_url( $this->_module . '/loadRigData' ),
 		);
 
 		$this->load->view('welcome_message', $data);
+	}
+
+	public function loadRigData()
+	{
+		return master::responseGetData($this->_m_rig);
 	}
 }

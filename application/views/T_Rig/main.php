@@ -1,6 +1,6 @@
 <style>
-	table.dataTable tbody td {
-		vertical-align: top;
+	table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+		vertical-align: middle;
 	}
 </style>
 
@@ -25,14 +25,11 @@
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
-                    <th width="5%">No</th>
-					<th width="22%">Nama Barang</th>
-                    <th width="15%">Serial Number</th>
-                    <th width="15%">Tipe Barang</th>
-					<th width="15%">Tanggal Masuk</th>
-					<th width="8%">Posisi</th>
-					<th width="10%">Kondisi</th>
-                    <th width="10%">Aksi</th>
+					<tr>
+						<th width="5%">No</th>
+						<th>RIG</th>
+						<th width="10%">Aksi</th>
+					</tr>
 				</thead>
 				<tbody>
 				</tbody>
@@ -46,13 +43,12 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 
-		// Select2 Pemilihan Barang
-		$('#id_status_barang').select2({
-			width: 'resolve', 
-			placeholder: '- Pilih Status Barang -',
+		$('#id_rig').select2({
 			dropdownParent: $('#addModal'),
+			width: 'resolve',
+			placeholder: '-- Pilih RIG --',
 			ajax: {
-				url: '<?php echo $statusSource; ?>',
+				url: '<?php echo $rigSource; ?>',
 				dataType: 'json',
 				type: 'GET',
 				data: function(params) {
@@ -64,27 +60,27 @@
 					return {
 						results: $.map(data.data, function(item) {
 							return {
-								text: item.name_status_barang,
-								id: item.id_status_barang
+								text: item.name_rig,
+								id: item.id_rig
 							}
 						})
-					};
+					}
 				}
 			}
-		});
 
-		// Select2 Pemilihan Barang
-		$('#id_type').select2({ 
+		})
+
+		$('#id_type').select2({
 			dropdownParent: $('#addModal'),
 			width: 'resolve',
-			placeholder: '- Pilih Tipe Barang -',
+			placeholder: '-- Pilih Jenis Barang --',
 			ajax: {
 				url: '<?php echo $typeSource; ?>',
 				dataType: 'json',
 				type: 'GET',
 				data: function(params) {
 					return {
-						q: params.term
+						q: params.term,
 					}
 				},
 				processResults: function(data) {
@@ -95,44 +91,45 @@
 								id: item.id_type
 							}
 						})
-					};
+					}
 				}
 			}
 		});
+		$('#id_type').on('select2:select', function(e) {
+			e.preventDefault();
+			$('#id_barang').select2({
+				width: 'resolve',
+				placeholder: '-- Pilih Barang --',
+				dropdownParent: $('#addModal'),
+				ajax: {
+					url: '<?php echo $brgSource; ?>' + '/id_type/' + $(this).val(),
+					dataType: 'json',
+					type: 'GET',
+					data: function(params) {
+						return {
+							q: params.term
+						}
+					},
+					processResults: function(data) {
+						return {
+							results: $.map(data.data, function(item) {
+								return {
+									text: item.name_barang,
+									id: item.id_barang
+								}
+							})
+						}
+					}
+				}
+				
+			})
+		})
 
-		// Select2 Pemilihan Status Lokasi
-		$('#id_status').select2({
+		$('#id_barang').select2({
 			width: 'resolve',
-			placeholder: '-- Pilih Lokasi Default Barang --',
-			dropdownParent: $('#addModal'),
-			ajax: {
-				url: '<?php echo $statusLokSource ; ?>',
-				dataType: 'json',
-				type: 'GET',
-				data: function(params) {
-					return {
-						q: params.term
-					}
-				},
-				processResults: function(data) {
-					return {
-						results: $.map(data.data, function(item) {
-							return {
-								text: item.name_status,
-								id: item.id_status
-							}
-						})
-					}
-				}
-			}
-		});
+			placeholder: '-- Pilih Barang --',
+		})
 
-		// Datepicker Tanggal masuk barang
-		$('#stock_in').datepicker({
-			dateFormat: 'dd-mm-yy'
-		});
-
-		// Form
 		$('#form_status').on('submit', function(e) {
 			e.preventDefault();			
 			$.ajax({
@@ -166,45 +163,17 @@
 			})
 		});
 
-		// Datatables
 		$('#dataTable').DataTable({
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: '<?php echo site_url($class . '/getData') ?>',
+				url: '<?php echo $dataSource; ?>',
 				dataSrc: 'data'
 			},
 			columns: [
-				{ 
-					data: 'id_barang',
-					render: function( data, type, row, meta) {
-						return meta.row + meta.settings._iDisplayStart + 1;
-					}
-				},
-				{ data: 'name_barang' },
-				{ data: 'serial_num' },
-                { data: 'name_type' },
-				{ data: 'stock_in',
-					render: function(data, type, row) {
-						let dt = new Date(data),
-							m = '' + dt.getMonth() + 1,
-							d = '' + dt.getDate(),
-							y = '' + dt.getFullYear();
-						if(m.length < 2 ) m = '0' + m;
-						if(d.length < 2 ) d = '0' + d;
-						return [d, m, y].join(' - ');
-					}
-				},
-				{ data: 'name_status',
-					render: function(data, type, row) {
-						if(data == '', data == null) {
-							return '-';
-						}
-						return data;
-					}
-				},
-				{ data: 'name_status_barang' },
-				{ data: 'id_barang',
+				{ data: 'id_rig' },
+				{ data: 'name_rig', },
+				{ data: 'id_rig',
 					render: function (data, type, row) {
 						let button =`
 							<button onclick="deleteData(${data})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
@@ -214,17 +183,6 @@
 				}
 			],
 		});
-
-		// Modal Function when hidden
-		$('#addModal').on('hidden.bs.modal', function(e) {
-			$('#dataTable').DataTable().ajax.reload();
-			$('#form_status').trigger('reset');
-			$("#id_type").val(null).trigger("change");
-			$("#id_status_barang").val(null).trigger("change");
-			$("#id_barang").val(null).trigger("change");
-			$('#save').css('display', 'block');
-			$('#update').css('display', 'none');
-		})
 	});	
 
 	function deleteData(data) {
@@ -279,17 +237,11 @@
 		})
 		.done(function(result) {
 			$('#addModal').modal('toggle');
+			$('#id_rig').attr('disabled', 'disabled');
 			$('#save').css('display', 'none');
 			$('#update').css('display', 'block');
-			$('#id_barang').val(result.data[0].id_barang);
-            // Field
-
-			defaultValueSelect2("#id_type", result.data[0].id_type, result.data[0].name_type)
-			defaultValueSelect2("#id_status_barang", result.data[0].id_status_barang, result.data[0].name_status_barang)
-			defaultValueSelect2("#id_status", result.data[0].id_status, result.data[0].name_status)
-			$('#name_barang').val(result.data[0].name_barang);
-            $('#s_n').val(result.data[0].serial_num);
-            $('#stock_in').val(result.data[0].stock_in);
+			$('#id_rig').val(result.data[0].id_rig);
+			$('#name_rig').val(result.data[0].name_rig);
 		})
 	}
 
@@ -297,13 +249,7 @@
 		$.ajax({
 			type: 'POST',
 			url: '<?php echo $update; ?>',
-			data: { 
-                id: $('#id_barang').val(), 
-                name_barang: $('#name_barang').val(),
-                s_n: $('#s_n').val(),
-                id_type: $('#id_type').val(),
-                stock_in: $('#stock_in')
-            }
+			data: { id_rig: $('#id_rig').val(), name_rig: $('#name_rig').val() }
 		})
 		.done(function(result) {
 			$('#addModal').modal('toggle');
@@ -330,9 +276,17 @@
 		});
 	})
 
-	function defaultValueSelect2(fieldId, id, val) {
-		var $newOption = $("<option selected='selected'></option>").val(id).text(val);
-		$(fieldId).append($newOption).trigger('change');
-	}
+	$('#addModal').on('hidden.bs.modal', function(e) {
+		$('#dataTable').DataTable().ajax.reload();
+		$('#form_status').trigger('reset');
+
+		$('#id_rig').removeAttr('disabled');
+		$('#id_rig').val(null).trigger("change");
+		$('#id_type').val(null).trigger("change");
+		$('#id_barang').val(null).trigger("change");
+
+		$('#save').css('display', 'block');
+		$('#update').css('display', 'none');
+	})
 
 </script>

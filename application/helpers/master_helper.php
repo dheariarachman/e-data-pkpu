@@ -87,11 +87,10 @@ class master {
                 ->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
-    public static function responseGetData($table = '') 
+    public static function responseGetData($table = '', $condition = array()) 
     {
         $CI =& get_instance();
         $CI->load->model(array('master_model'));
-
         $data = $CI->master_model->getAll($table);
         return self::returnJsonTable($data);
     }
@@ -129,12 +128,12 @@ class master {
         return self::setResponse($response, self::statusCode($data), self::$_json);
     }
 
-    public static function getDataSelect($table = '', $condition = array())
+    public static function getDataSelect($table = '', $condition = array(), $where_condition = array())
     {
         $CI =& get_instance();
         $CI->load->model(array('master_model'));
 
-        $data       = $CI->master_model->getLike($table, $condition);
+        $data       = $CI->master_model->getLike($table, $condition, $where_condition);
         $response   = self::responseDataSelect($data->result());
 
         return self::setResponse($response, self::statusCode($data), self::$_json);

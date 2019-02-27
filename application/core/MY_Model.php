@@ -20,12 +20,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             return $this->db->get();
         }
 
-        public function getLike($table = '', $condition = array())
+        public function getLike($table = '', $condition = array(), $where_condition = array())
         {
             $this->db->select('*');
             $this->db->from($table);
             if(!empty($condition)) {
                 $this->db->like($condition);
+            }
+            if(!empty($where_condition)) {
+                $this->db->where($where_condition);
             }
             return $this->db->get();
         }
