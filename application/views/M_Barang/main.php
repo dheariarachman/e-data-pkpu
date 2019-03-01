@@ -26,9 +26,9 @@
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
                     <th width="5%">No</th>
-					<th width="22%">Nama Barang</th>
-                    <th width="15%">Serial Number</th>
-                    <th width="15%">Tipe Barang</th>
+					<th width="30%">Nama Barang</th>
+					<th width="15%">Tipe Barang</th>
+					<th width="7%">Jumlah</th>
 					<th width="15%">Tanggal Masuk</th>
 					<th width="8%">Posisi</th>
 					<th width="10%">Kondisi</th>
@@ -182,8 +182,8 @@
 					}
 				},
 				{ data: 'name_barang' },
-				{ data: 'serial_num' },
                 { data: 'name_type' },
+				{ data: 'count' },
 				{ data: 'stock_in',
 					render: function(data, type, row) {
 						let dt = new Date(data),
@@ -288,21 +288,23 @@
 			defaultValueSelect2("#id_status_barang", result.data[0].id_status_barang, result.data[0].name_status_barang)
 			defaultValueSelect2("#id_status", result.data[0].id_status, result.data[0].name_status)
 			$('#name_barang').val(result.data[0].name_barang);
-            $('#s_n').val(result.data[0].serial_num);
+            $('#count').val(result.data[0].count);
             $('#stock_in').val(result.data[0].stock_in);
 		})
 	}
 
-	$('#update').on('click', function(e) {
+	$('#update').on('click', function() {
 		$.ajax({
 			type: 'POST',
 			url: '<?php echo $update; ?>',
 			data: { 
                 id: $('#id_barang').val(), 
                 name_barang: $('#name_barang').val(),
-                s_n: $('#s_n').val(),
+                count: $('#count').val(),
                 id_type: $('#id_type').val(),
-                stock_in: $('#stock_in')
+                stock_in: $('#stock_in').val(),
+				id_status_barang: $('#id_status_barang').val(),
+				id_status: $('#id_status').val()
             }
 		})
 		.done(function(result) {

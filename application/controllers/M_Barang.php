@@ -8,7 +8,6 @@ class M_Barang extends MY_Controller {
     private $_module        = 'M_Barang';
     private $_title         = 'Master Barang';
 
-    private $_v_m_barang    = 'v_m_barang';
     private $_v_m_full_barang    = 'v_m_full_barang';
     
     public function __construct()
@@ -39,13 +38,13 @@ class M_Barang extends MY_Controller {
 
     public function getData()
     {
-        return master::responseGetData($this->_v_m_barang);
+        return master::responseGetData($this->_v_m_full_barang);
     }
 
     public function saveData()
     {
         $this->form_validation->set_rules('id_type', 'Tipe', 'required');
-        $this->form_validation->set_rules('serial_num', 'Serial Number', 'trim|required|is_unique['.$this->_table.'.serial_num]');
+        $this->form_validation->set_rules('count', 'Serial Number', 'trim|required');
         $this->form_validation->set_rules('name_barang', 'Nama Barang', 'trim|required');
         $this->form_validation->set_rules('stock_in', 'Tanggal Masuk', 'required');
         $this->form_validation->set_rules('id_status_barang', 'Status Barang', 'required');
@@ -84,13 +83,13 @@ class M_Barang extends MY_Controller {
     {
         $id = $this->input->post('id');
 
-        $stockIn        = DateTime::createFromFormat('d-m-Y', $this->input->post('stock_in'));
+        $stockIn        = DateTime::createFromFormat('Y-m-d', $this->input->post('stock_in'));
         $stockInFormat  = $stockIn->format('Y-m-d');
 
         $data = array(
             'id_type'           => $this->input->post('id_type'),
             'name_barang'       => $this->input->post('name_barang'),
-            's_n'               => $this->input->post('s_n'),
+            'count'             => $this->input->post('count'),
             'stock_in'          => $stockInFormat,
             'id_status_barang'  => $this->input->post('id_status_barang'),
             'id_status'         => $this->input->post('id_status'),

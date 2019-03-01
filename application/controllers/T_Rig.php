@@ -11,7 +11,9 @@ class T_Rig extends MY_Controller {
     private $_m_rig     = 'm_rig';
     private $_m_type    = 'm_type';
 
-    private $_id        = 'id_rig';
+    private $_v_t_rig   = 'v_t_rig';
+
+    private $_id        = 'id';
     
     public function __construct()
     {
@@ -33,7 +35,6 @@ class T_Rig extends MY_Controller {
             'edit'          => site_url( $this->_module . '/editData'),
             'update'        => site_url( $this->_module . '/updateData'),
             'rigSource'     => site_url( $this->_module . '/getDataRig' ),
-            'typeSource'    => site_url( $this->_module . '/getDataType' ),
             'brgSource'     => site_url( $this->_module . '/getDataBarang' )
         );
 
@@ -46,7 +47,7 @@ class T_Rig extends MY_Controller {
         if(!empty($id)) {
             $condition = array('id_rig' => $id);
         }
-        return master::responseGetData($this->_table, $condition);
+        return master::responseGetData($this->_v_t_rig, $condition);
     }
 
     public function getDataRig()
@@ -63,11 +64,21 @@ class T_Rig extends MY_Controller {
 
     public function saveData()
     {        
-        $this->form_validation->set_rules($this->_id, 'ID Tipe', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
-        $this->form_validation->set_rules('name_rig', 'Nama Status Barang', 'trim|required');
-        
+        // $this->form_validation->set_rules($this->_id, 'ID Tipe', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
+        $this->form_validation->set_rules('id_rig', 'Lokasi RIG ', 'trim|required');
+        $this->form_validation->set_rules('id_type', 'Jenis Barang ', 'trim|required');
+        $this->form_validation->set_rules('id_rig', 'Lokasi RIG ', 'trim|required');
+
+        $data = $this->input->post();
+        // print_debug($data);
+        $data = array(
+            'id_rig'    => $this->input->post('id_rig'),
+            'id_barang' => $this->input->post('id_barang'),
+            'id_type'   => $this->input->post('id_type'),
+        );
+        // unset($data['id_rig']);
         if ($this->form_validation->run() == TRUE ) {
-            $data = $this->input->post();
+            // $data = $this->input->post();
             return master::saveData($data, $this->_table);
         }
     }

@@ -17,7 +17,7 @@
 						<input type="text" class="form-control" id="name_barang" placeholder="Nama Barang" name="name_barang"  autocomplete="off">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="serial_num" placeholder="Serial Number" name="serial_num" autocomplete="off">
+						<input type="number" class="form-control" id="count" placeholder="Jumlah" name="count" autocomplete="off">
                     </div>
                     <div class="form-group">
 						<select style="width: 100%" class="form-control" name="id_type" id="id_type" autocomplete="off"></select>

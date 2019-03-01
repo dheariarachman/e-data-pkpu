@@ -32,12 +32,14 @@ class MY_Controller extends CI_Controller {
         return master::getDataSelect($this->_m_status, array('name_status' => $params));
     }
 
-    public function getDataBarang($id_col = '', $id = '')
+    public function getDataBarang($id_col = '', $id = '', $type = '')
     {
         $params = $this->input->get('q');
         $condition = array();
-        if(!empty($id)) {
-            $condition = array($id_col => $id);
+        if(!empty($id) || $id != 0) {
+            $condition = array($id_col => $id, 'id_type' => $type);
+        } else {
+            $condition = array('id_type' => $type);
         }
         return master::getDataSelect($this->_m_barang, array('name_barang' => $params), $condition);
     }

@@ -28,6 +28,8 @@
 					<tr>
 						<th width="5%">No</th>
 						<th>RIG</th>
+						<th>Barang</th>
+						<th>Jenis</th>
 						<th width="10%">Aksi</th>
 					</tr>
 				</thead>
@@ -43,92 +45,14 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 
-		$('#id_rig').select2({
-			dropdownParent: $('#addModal'),
-			width: 'resolve',
-			placeholder: '-- Pilih RIG --',
-			ajax: {
-				url: '<?php echo $rigSource; ?>',
-				dataType: 'json',
-				type: 'GET',
-				data: function(params) {
-					return {
-						q: params.term
-					}
-				},
-				processResults: function(data) {
-					return {
-						results: $.map(data.data, function(item) {
-							return {
-								text: item.name_rig,
-								id: item.id_rig
-							}
-						})
-					}
-				}
-			}
-
-		})
-
-		$('#id_type').select2({
-			dropdownParent: $('#addModal'),
-			width: 'resolve',
-			placeholder: '-- Pilih Jenis Barang --',
-			ajax: {
-				url: '<?php echo $typeSource; ?>',
-				dataType: 'json',
-				type: 'GET',
-				data: function(params) {
-					return {
-						q: params.term,
-					}
-				},
-				processResults: function(data) {
-					return {
-						results: $.map(data.data, function(item) {
-							return {
-								text: item.name_type,
-								id: item.id_type
-							}
-						})
-					}
-				}
-			}
-		});
-		$('#id_type').on('select2:select', function(e) {
-			e.preventDefault();
-			$('#id_barang').select2({
-				width: 'resolve',
-				placeholder: '-- Pilih Barang --',
-				dropdownParent: $('#addModal'),
-				ajax: {
-					url: '<?php echo $brgSource; ?>' + '/id_type/' + $(this).val(),
-					dataType: 'json',
-					type: 'GET',
-					data: function(params) {
-						return {
-							q: params.term
-						}
-					},
-					processResults: function(data) {
-						return {
-							results: $.map(data.data, function(item) {
-								return {
-									text: item.name_barang,
-									id: item.id_barang
-								}
-							})
-						}
-					}
-				}
-				
-			})
-		})
-
-		$('#id_barang').select2({
-			width: 'resolve',
-			placeholder: '-- Pilih Barang --',
-		})
+		initSelect2('#id_rig', '#addModal', '<?php echo $rigSource; ?>', 'item.id_rig', 'item.name_rig', '-- Pilih RIG --');
+		initSelect2('#id_barang_psu_1', '#addModal', '<?php echo $brgSource; ?>/0/0/1', 'item.id_barang', 'item.name_barang', '-- Pilih PSU - 1 --');
+		initSelect2('#id_barang_psu_2', '#addModal', '<?php echo $brgSource; ?>/0/0/2', 'item.id_barang', 'item.name_barang', '-- Pilih PSU - 2 --');
+		initSelect2('#id_barang_gpu', '#addModal', '<?php echo $brgSource; ?>/0/0/3', 'item.id_barang', 'item.name_barang', '-- Pilih GPU --');
+		initSelect2('#id_barang_ram', '#addModal', '<?php echo $brgSource; ?>/0/0/4', 'item.id_barang', 'item.name_barang', '-- Pilih RAM --');
+		initSelect2('#id_barang_mobo', '#addModal', '<?php echo $brgSource; ?>/0/0/5', 'item.id_barang', 'item.name_barang', '-- Pilih Mobo --');
+		initSelect2('#id_barang_usb', '#addModal', '<?php echo $brgSource; ?>/0/0/6', 'item.id_barang', 'item.name_barang', '-- Pilih Data USB --');
+		initSelect2('#id_barang_ssd', '#addModal', '<?php echo $brgSource; ?>/0/0/7', 'item.id_barang', 'item.name_barang', '-- Pilih Data SSD --');
 
 		$('#form_status').on('submit', function(e) {
 			e.preventDefault();			
@@ -171,9 +95,16 @@
 				dataSrc: 'data'
 			},
 			columns: [
-				{ data: 'id_rig' },
-				{ data: 'name_rig', },
-				{ data: 'id_rig',
+				{ 
+					data: 'id',
+					render: function( data, type, row, meta) {
+						return meta.row + meta.settings._iDisplayStart + 1;
+					}
+				},
+				{ data: 'name_rig' },
+				{ data: 'name_barang' },
+				{ data: 'name_type' },
+				{ data: 'id',
 					render: function (data, type, row) {
 						let button =`
 							<button onclick="deleteData(${data})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
@@ -242,6 +173,34 @@
 			$('#update').css('display', 'block');
 			$('#id_rig').val(result.data[0].id_rig);
 			$('#name_rig').val(result.data[0].name_rig);
+		})
+	}
+
+	function initSelect2(elem, modalParent, url, param_id, param_text, placeholder) {
+		$(elem).select2({
+			dropdownParent: $(modalParent),
+			width: 'resolve',
+			placeholder: placeholder,
+			ajax: {
+				url: url,
+				dataType: 'json',
+				type: 'GET',
+				data: function(params) {
+					return {
+						q: params.term
+					}
+				},
+				processResults: function(data) {
+					return {
+						results: $.map(data.data, function(item) {
+							return {
+								text: eval(param_text),
+								id: eval(param_id)
+							}
+						})
+					}
+				}
+			}
 		})
 	}
 
