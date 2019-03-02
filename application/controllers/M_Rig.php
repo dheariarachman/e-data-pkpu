@@ -48,7 +48,6 @@ class M_Rig extends MY_Controller
         if ($this->form_validation->run() == true) {
             $data = $this->input->post();
             return master::saveData($data, $this->_table);
-            // echo $this->db->insert($this->_table, $data);
         }
     }
 

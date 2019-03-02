@@ -231,7 +231,7 @@
 						<div class="form-group row">
 					    <div class="col-sm-3"><font size="2">Dokumen Tambahan</font></div>
 					    <div class="col-sm-9">
-								<textarea name="letter_bill_detail" id="letter_bill_detail" cols="30" rows="3" class="form-control" placeholder="Dokumen Tambahan"></textarea>
+								<textarea name="other_document" id="other_document" cols="30" rows="3" class="form-control" placeholder="Dokumen Tambahan"></textarea>
 					    </div>
 					  </div>
 

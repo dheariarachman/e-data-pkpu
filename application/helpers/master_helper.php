@@ -112,6 +112,7 @@ class master
         $status_saved   = $CI->master_model->save($data, $table);
         $response       = self::responseData(!$status_saved, self::statusSaved($status_saved));
 
+        self::_createLogActivity('memasukan data ke ' . $table, $data['id']);
         return self::setResponse($response, self::statusCode($status_saved), self::$_json);
     }
 
@@ -123,6 +124,7 @@ class master
         $status_deleted     = $CI->master_model->delete($data, $table);
         $response           = self::responseData(!$status_deleted, self::statusDeleted($status_deleted));
 
+        self::_createLogActivity('menghapus data  ' . $table, $data['id']);
         return self::setResponse($response, self::statusCode($status_deleted), self::$_json);
     }
 
@@ -146,7 +148,6 @@ class master
         $response   = self::responseDataSelect($data->result());
 
         return self::setResponse($response, self::statusCode($data), self::$_json);
-        // return $response;
     }
 
     public static function getDataById($data = array(), $table = '')
@@ -168,6 +169,22 @@ class master
         $status_update  = $CI->master_model->update($data, $condition, $table);
         $response       = self::responseData(self::status($status_update), self::statusUpdated($status_update), '', '');
 
+        self::_createLogActivity('update data table . ' . $table, $condition);
         return self::setResponse($response, self::statusCode($status_update), self::$_json);
+    }
+
+    private static function _createLogActivity($activity = '', $data = '')
+    {
+        $CI =& get_instance();
+        $CI->load->model(array('master_model'));
+
+        $data = array(
+            'username'      => $CI->session->userdata('display_name'),
+            'ip_address'    => $CI->input->ip_address(),
+            'activity'      => $activity,
+            'data'          => $data
+        );
+
+        return $CI->master_model->save($data, 'log_activity');
     }
 }

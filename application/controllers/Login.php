@@ -62,6 +62,7 @@ class Login extends MY_Controller
                     $session_data = array(
                         'id'            => $user[0]->id,
                         'display_name'  => $user[0]->display_name,
+                        'role'          => $user[0]->role,
                         'is_loggedin'   => true,
                     );
                     

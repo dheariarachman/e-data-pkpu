@@ -92,8 +92,7 @@
                 { data: 'numbering'},
                 { data: 'customer', },
                 { data: 'c_address', },
-                { 
-                    data: 'amount' ,
+                { data: 'amount' ,
                     render: function(data, type, row) {
                         return $.number(data)
                     }
@@ -101,15 +100,15 @@
                 { data: 'id',
                     render: function (data, type, row) {
                         let button =`
-                            <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                            <?php if($this->session->userdata('role') == '99'): ?>
+                                <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                            <?php endif; ?>
                             <button onclick="editData('${data}')" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-pen"></i></button>`;
                         return button;
                     }
                 }
             ],
         });
-
-
     }); 
 
     function deleteData(data) {
@@ -168,8 +167,32 @@
             $('#save').css('display', 'none');
             $('#update').css('display', 'block');
             $('#id').val(result.data[0].id);
-            // $('#id_rig').val(result.data[0].id_rig);
-            // $('#name_rig').val(result.data[0].name_rig);
+
+            // Field Text
+            $('#customer').val(result.data[0].customer);
+            $('#c_address').text(result.data[0].c_address);
+            $('#bilyet_k_detail').text(result.data[0].bilyet_k_detail);
+            $('#bilyet_s_detail').text(result.data[0].bilyet_s_detail);
+            $('#ktp_detail').text(result.data[0].ktp_detail);
+            $('#bank_evidence_detail').text(result.data[0].bank_evidence_detail);
+            $('#family_card_detail').text(result.data[0].family_card_detail);
+            $('#receipt_detail').text(result.data[0].receipt_detail);
+            $('#passport_detail').text(result.data[0].passport_detail);
+            $('#power_of_attorney_detail').text(result.data[0].power_of_attorney_detail);
+            $('#letter_bill_detail').text(result.data[0].letter_bill_detail);
+            $('#amount').val(result.data[0].amount);
+            $('#other_document').val(result.data[0].other_document);
+
+            // Checkbox
+            $('#bilyet_k').attr('checked', result.data[0].bilyet_k);
+            $('#bilyet_s').attr('checked', result.data[0].bilyet_s);
+            $('#ktp').attr('checked', result.data[0].ktp);
+            $('#bank_evidence').attr('checked', result.data[0].bank_evidence);
+            $('#family_card').attr('checked', result.data[0].family_card);
+            $('#receipt').attr('checked', result.data[0].receipt);
+            $('#passport').attr('checked', result.data[0].passport);
+            $('#power_of_attorney').attr('checked', result.data[0].power_of_attorney);
+            $('#letter_bill').attr('checked', result.data[0].letter_bill);
         })
     }
 
@@ -207,14 +230,11 @@
     $('#addModal').on('hidden.bs.modal', function(e) {
         $('#dataTable').DataTable().ajax.reload();
         $('#form_status').trigger('reset');
-        $('#id_rig').removeAttr('disabled');
-        $('#id_rig').val('');
-        $('#name_rig').val('');
         $('#save').css('display', 'block');
         $('#update').css('display', 'none');
     })
 
-    $('#addModal').on('shown.bs.modal', function(e) {
+    $('#addModal').on('show.bs.modal', function(e) {
         let currentDate = new Date();
         let dateTime    =   currentDate.getDate() + '.' +
                             (currentDate.getMonth() + 1) + '.' +
@@ -223,7 +243,6 @@
                             currentDate.getMinutes() + '.' + currentDate.getSeconds();
 
         $('#id').val(dateTime);
-        // console.log(dateTime);
     });
 
 </script>
