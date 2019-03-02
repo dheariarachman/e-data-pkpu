@@ -9,7 +9,7 @@ class M_Rig extends MY_Controller
     private $_module    = 'M_Rig';
     private $_title     = 'Master Entry Data';
 
-    private $_id         = 'id_rig';
+    private $_id         = 'id';
     
     public function __construct()
     {
@@ -41,14 +41,15 @@ class M_Rig extends MY_Controller
 
     public function saveData()
     {
-        print_debug($this->input->post());
-        // $this->form_validation->set_rules($this->_id, 'ID Tipe', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
-        // $this->form_validation->set_rules('name_rig', 'Nama Status Barang', 'trim|required');
+        $this->form_validation->set_rules($this->_id, 'ID', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
+        $this->form_validation->set_rules('customer', 'Nama Jamaah', 'trim|required');
+        $this->form_validation->set_rules('c_address', 'Alamat Jamaah', 'trim|required');
         
-        // if ($this->form_validation->run() == true) {
-        //     $data = $this->input->post();
-        //     return master::saveData($data, $this->_table);
-        // }
+        if ($this->form_validation->run() == true) {
+            $data = $this->input->post();
+            return master::saveData($data, $this->_table);
+            // echo $this->db->insert($this->_table, $data);
+        }
     }
 
     public function deleteData()

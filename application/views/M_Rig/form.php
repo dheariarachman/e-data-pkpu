@@ -11,10 +11,10 @@
 			<div class="modal-body">
 				<form id="form_status">
 					<div class="form-group">
-						<input type="text" class="form-control" id="id" aria-describedby="id_help" name="id" autocomplete="off" disabled>
+						<input type="text" class="form-control" id="id" aria-describedby="id_help" name="id" autocomplete="off" readonly>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="customer" placeholder="Nama Customer" name="customer" autocomplete="off">
+						<input type="text" class="form-control" id="customer" placeholder="Nama Jamaah" name="customer" autocomplete="off">
 					</div>
 
 					<div class="form-group">
@@ -38,7 +38,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="bilyet_k_detail" name="bilyet_k_detail" placeholder="Blyet K Detail">
+								<!-- <input type="text" class="form-control" id="bilyet_k_detail" name="bilyet_k_detail" placeholder="Blyet K Detail"> -->
+								<textarea name="bilyet_k_detail" id="bilyet_k_detail" cols="30" rows="3" class="form-control" placeholder="Bilyet K Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -59,7 +60,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="bilyet_s_detail" name="bilyet_s_detail" placeholder="Bilyet S Detail">
+								<!-- <input type="text" class="form-control" id="bilyet_s_detail" name="bilyet_s_detail" placeholder="Bilyet S Detail"> -->
+								<textarea name="bilyet_s_detail" id="bilyet_s_detail" cols="30" rows="3" class="form-control" placeholder="Bilyet S Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -69,7 +71,7 @@
 					    <div class="col-sm-3">KTP</div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="ktp" name="ktp">
+					        <input class="form-check-input" type="checkbox" id="ktp" name="ktp" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -80,7 +82,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="ktp_detail" name="ktp_detail" placeholder="No. KTP">
+								<!-- <input type="text" class="form-control" id="ktp_detail" name="ktp_detail" placeholder="No. KTP"> -->
+								<textarea name="ktp_detail" id="ktp_detail" cols="30" rows="3" class="form-control" placeholder="KTP Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -90,7 +93,7 @@
 					    <div class="col-sm-3">Bukti Setor Bank</div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="bank_evidence" name="bank_evidence">
+					        <input class="form-check-input" type="checkbox" id="bank_evidence" name="bank_evidence" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -101,7 +104,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="bank_evidence_detail" name="bank_evidence_detail" placeholder="No. Bukti Setor Bank">
+								<!-- <input type="text" class="form-control" id="bank_evidence_detail" name="bank_evidence_detail" placeholder="No. Bukti Setor Bank"> -->
+								<textarea name="bank_evidence_detail" id="bank_evidence_detail" cols="30" rows="3" class="form-control" placeholder="Bukti Setor Bank Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -111,7 +115,7 @@
 					    <div class="col-sm-3">Kartu Keluarga</div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="famili_card" name="famili_card">
+					        <input class="form-check-input" type="checkbox" id="family_card" name="family_card" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -122,7 +126,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="famili_card_detail" name="famili_card_detail" placeholder="No. Kartu Keluarga ( Jika Perlu )">
+								<!-- <input type="text" class="form-control" id="family_card_detail" name="family_card_detail" placeholder="No. Kartu Keluarga ( Jika Perlu )"> -->
+								<textarea name="family_card_detail" id="family_card_detail" cols="30" rows="3" class="form-control" placeholder="Kartu Keluarga Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -132,7 +137,7 @@
 					    <div class="col-sm-3">Kwitansi Pembayaran</div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="receipt" name="receipt">
+					        <input class="form-check-input" type="checkbox" id="receipt" name="receipt" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -143,7 +148,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="receipt_detail" name="receipt_detail" placeholder="No. Kwitansi Pembayaran">
+								<!-- <input type="text" class="form-control" id="receipt_detail" name="receipt_detail" placeholder="No. Kwitansi Pembayaran"> -->
+								<textarea name="receipt_detail" id="receipt_detail" cols="30" rows="3" class="form-control" placeholder="Kwitansi Pembayaran Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -153,7 +159,7 @@
 					    <div class="col-sm-3">Passport</div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="passport" name="passport">
+					        <input class="form-check-input" type="checkbox" id="passport" name="passport" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -164,7 +170,8 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="passport_detail" name="passport_detail" placeholder="Detail Passport">
+								<!-- <input type="text" class="form-control" id="passport_detail" name="passport_detail" placeholder="Detail Passport"> -->
+								<textarea name="passport_detail" id="passport_detail" cols="30" rows="3" class="form-control" placeholder="Passport Detail"></textarea>
 					    </div>
 				  	</div>
 
@@ -174,7 +181,7 @@
 					    <div class="col-sm-3">Surat Kuasa</div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="power_of_attorney" name="power_of_attorney">
+					        <input class="form-check-input" type="checkbox" id="power_of_attorney" name="power_of_attorney" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -185,17 +192,18 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="power_of_attorney_detail" name="power_of_attorney_detail" placeholder="Nama Yang Diberi Kuasa">
+								<!-- <input type="text" class="form-control" id="power_of_attorney_detail" name="power_of_attorney_detail" placeholder="Nama Yang Diberi Kuasa"> -->
+								<textarea name="power_of_attorney_detail" id="power_of_attorney_detail" cols="30" rows="3" class="form-control" placeholder="Nama Yang DIberi Kuasa"></textarea>
 					    </div>
 				  	</div>
 
 				  	<!-- letter bill -->
 
 				  	<div class="form-group row">
-					    <div class="col-sm-3">Surat Pengajuan Tagihan</div>
+					    <div class="col-sm-3"><font size="2">Surat Pengajuan Tagihan</font></div>
 					    <div class="col-sm-9">
 					      <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="letter_bill" name="letter_bill">
+					        <input class="form-check-input" type="checkbox" id="letter_bill" name="letter_bill" value="1">
 					        <label class="form-check-label" for="gridCheck1">
 					          Available
 					        </label>
@@ -206,9 +214,26 @@
 				  	<div class="form-group row">
 					    <label for="Bilyet_K" class="col-sm-3 col-form-label"></label>					    
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="letter_bill_detail" name="letter_bill_detail" placeholder="Detail Surat Pengajuan Tagihan">
+								<!-- <input type="text" class="form-control" id="letter_bill_detail" name="letter_bill_detail" placeholder="Detail Surat Pengajuan Tagihan"> -->
+								<textarea name="letter_bill_detail" id="letter_bill_detail" cols="30" rows="3" class="form-control" placeholder="Surat Pengajuan Tagihan Detail"></textarea>
 					    </div>
-				  	</div>
+						</div>
+						
+						<!-- Amount -->
+						<div class="form-group row">
+					    <div class="col-sm-3"><font size="3">Total Tagihan</font></div>
+					    <div class="col-sm-4">
+							<input class="form-control" type="text" id="amount" name="amount" placeholder="x.xxx.xxx">
+					    </div>
+						</div>
+						
+						<!-- Dokumen Tambahan / other_document -->
+						<div class="form-group row">
+					    <div class="col-sm-3"><font size="2">Dokumen Tambahan</font></div>
+					    <div class="col-sm-9">
+								<textarea name="letter_bill_detail" id="letter_bill_detail" cols="30" rows="3" class="form-control" placeholder="Dokumen Tambahan"></textarea>
+					    </div>
+					  </div>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

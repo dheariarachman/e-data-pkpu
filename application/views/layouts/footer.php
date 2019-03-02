@@ -10,6 +10,12 @@
 <!-- Jquery Confirm -->
 <script src="<?php echo base_url() ?>/assets/js/jquery-confirm.min.js"></script>
 
+<!-- Jquery number -->
+<script src="<?php echo base_url() ?>/assets/js/jquery-number.min.js"></script>
+
+<!-- CommonJS -->
+<script src="<?php echo base_url() ?>/assets/js/common.js"></script>
+
 <!-- Select2 -->
 <script src="<?php echo base_url() ?>/assets/js/select2/select2.min.js"></script>
 <script src="<?php echo base_url() ?>/assets/js/select2/select2.min.js.4.0.0.js"></script>

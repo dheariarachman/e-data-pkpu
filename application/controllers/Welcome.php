@@ -35,6 +35,7 @@ class Welcome extends MY_Controller
     public function index()
     {
         $data = array(
+            'title'         => 'Dashboard',
             'content'       => 'layouts/dashboard',
         );
 

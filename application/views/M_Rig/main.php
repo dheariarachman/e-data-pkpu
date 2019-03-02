@@ -45,6 +45,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('#amount').number(true);
+        $('#amount').ForceNumericOnly();
+
         $('#form_status').on('submit', function(e) {
             e.preventDefault();         
             $.ajax({
@@ -86,20 +89,20 @@
                 dataSrc: 'data'
             },
             columns: [
-                { 
-                    data: 'id', 
-                    render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
-                },
+                { data: 'numbering'},
                 { data: 'customer', },
                 { data: 'c_address', },
-                { data: 'amount' },
+                { 
+                    data: 'amount' ,
+                    render: function(data, type, row) {
+                        return $.number(data)
+                    }
+                },
                 { data: 'id',
                     render: function (data, type, row) {
                         let button =`
-                            <button onclick="deleteData(${data})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                            <button onclick="editData(${data})" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-pen"></i></button>`;
+                            <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                            <button onclick="editData('${data}')" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-pen"></i></button>`;
                         return button;
                     }
                 }
@@ -160,12 +163,13 @@
             data: { id: data },
         })
         .done(function(result) {
+            console.log(result);
             $('#addModal').modal('toggle');
-            $('#id_rig').attr('disabled', 'disabled');
             $('#save').css('display', 'none');
             $('#update').css('display', 'block');
-            $('#id_rig').val(result.data[0].id_rig);
-            $('#name_rig').val(result.data[0].name_rig);
+            $('#id').val(result.data[0].id);
+            // $('#id_rig').val(result.data[0].id_rig);
+            // $('#name_rig').val(result.data[0].name_rig);
         })
     }
 
@@ -219,7 +223,7 @@
                             currentDate.getMinutes() + '.' + currentDate.getSeconds();
 
         $('#id').val(dateTime);
-        console.log(dateTime);
+        // console.log(dateTime);
     });
 
 </script>
