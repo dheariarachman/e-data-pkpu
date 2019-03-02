@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Inventory</title>
+  <title>E-Data 2 - <?php echo !isset($title) ? '' : $title; ?></title>
 
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url() ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

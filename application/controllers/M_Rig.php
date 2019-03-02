@@ -1,12 +1,13 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_Rig extends MY_Controller {
+class M_Rig extends MY_Controller
+{
 
-    private $_table     = 'm_rig';
+    private $_table     = 'm_data';
     private $_module    = 'M_Rig';
-    private $_title     = 'Master RIG';
+    private $_title     = 'Master Entry Data';
 
     private $_id         = 'id_rig';
     
@@ -24,13 +25,13 @@ class M_Rig extends MY_Controller {
             'title'     => $this->_title,
             'class'     => $this->_module,
             'form'      => $this->_module . '/form',
-            'action'    => site_url( $this->_module . '/saveData'),
-            'delete'    => site_url( $this->_module . '/deleteData'),
-            'edit'      => site_url( $this->_module . '/editData'),
-            'update'    => site_url( $this->_module . '/updateData'),
+            'action'    => site_url($this->_module . '/saveData'),
+            'delete'    => site_url($this->_module . '/deleteData'),
+            'edit'      => site_url($this->_module . '/editData'),
+            'update'    => site_url($this->_module . '/updateData'),
         );
 
-        $this->load->view('welcome_message', $data);        
+        $this->load->view('welcome_message', $data);
     }
 
     public function getData()
@@ -39,14 +40,15 @@ class M_Rig extends MY_Controller {
     }
 
     public function saveData()
-    {        
-        $this->form_validation->set_rules($this->_id, 'ID Tipe', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
-        $this->form_validation->set_rules('name_rig', 'Nama Status Barang', 'trim|required');
+    {
+        print_debug($this->input->post());
+        // $this->form_validation->set_rules($this->_id, 'ID Tipe', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
+        // $this->form_validation->set_rules('name_rig', 'Nama Status Barang', 'trim|required');
         
-        if ($this->form_validation->run() == TRUE ) {
-            $data = $this->input->post();
-            return master::saveData($data, $this->_table);
-        }
+        // if ($this->form_validation->run() == true) {
+        //     $data = $this->input->post();
+        //     return master::saveData($data, $this->_table);
+        // }
     }
 
     public function deleteData()
@@ -67,7 +69,6 @@ class M_Rig extends MY_Controller {
         $name_rig    = $this->input->post('name_rig');
         return master::updateData(array('name_rig' => $name_rig), array($this->_id => $id_rig), $this->_table);
     }
-
 }
 
 /* End of file M_Jenisitem.php */

@@ -1,27 +1,41 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_model extends MY_Model {
+class User_model extends MY_Model
+{
 
-    private $_m_user = 'm_user';
+    private $_account = 'account';
 
-    public function login($username = '', $password = '')
+    public function login($condition = array())
     {
-        $condition = array('username' => $username, 'password' => $password);
         $this->db->select('*');
-        $this->db->from($this->_m_user);
+        $this->db->from($this->_account);
         $this->db->where($condition);
         $result = $this->db->get();
-        if($result->num_rows() > 0) {
-            $array = array(
-                'userid'        => $result->row('id_user'),
-                'display_name'  => $result->row('display_name'),
-                'nik'           => $result->row('nik'),
-            );
-            $this->setLastLogin($result->row('id_user'));
-            $this->session->set_userdata( $array );
+        if ($result->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    public function userProfile($condition = array())
+    {
+        $this->db->select('*');
+        $this->db->from($this->_account);
+        $this->db->where($condition);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function userSignup($condition = array())
+    {
+        return $this->db->insert($this->_account, $condition);
     }
 
     public function setLastLogin($id)

@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class MY_Controller extends CI_Controller {
+class MY_Controller extends CI_Controller
+{
 
     private $_m_type        = 'm_type';
     private $_m_status      = 'm_status';
@@ -36,7 +37,7 @@ class MY_Controller extends CI_Controller {
     {
         $params = $this->input->get('q');
         $condition = array();
-        if(!empty($id) || $id != 0) {
+        if (!empty($id) || $id != 0) {
             $condition = array($id_col => $id, 'id_type' => $type);
         } else {
             $condition = array('id_type' => $type);
