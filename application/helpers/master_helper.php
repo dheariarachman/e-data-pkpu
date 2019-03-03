@@ -169,7 +169,7 @@ class master
         $status_update  = $CI->master_model->update($data, $condition, $table);
         $response       = self::responseData(self::status($status_update), self::statusUpdated($status_update), '', '');
 
-        self::_createLogActivity('update data table . ' . $table, $condition);
+        self::_createLogActivity('update data table . ' . $table, $condition['id']);
         return self::setResponse($response, self::statusCode($status_update), self::$_json);
     }
 
@@ -186,5 +186,10 @@ class master
         );
 
         return $CI->master_model->save($data, 'log_activity');
+    }
+
+    public static function cetak($title = '', $html = '', $orientation = '')
+    {
+        mpdf::print_pdf($title, $html, $orientation);
     }
 }

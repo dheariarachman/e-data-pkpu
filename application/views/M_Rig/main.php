@@ -91,7 +91,11 @@
             columns: [
                 { data: 'numbering'},
                 { data: 'customer', },
-                { data: 'c_address', },
+                { data: 'c_address', 
+                    render: function(data) {
+                        return decodeURI(data)
+                    }
+                },
                 { data: 'amount' ,
                     render: function(data, type, row) {
                         return $.number(data)
@@ -101,15 +105,67 @@
                     render: function (data, type, row) {
                         let button =`
                             <?php if($this->session->userdata('role') == '99'): ?>
-                                <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm" title="Hapus Data"><i class="fas fa-trash"></i></button>
                             <?php endif; ?>
-                            <button onclick="editData('${data}')" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-pen"></i></button>`;
+                            <button onclick="editData('${data}')" class="btn btn-warning btn-circle btn-sm" title="Ubah Data"><i class="fas fa-pen"></i></button>
+                            <a target="_blank" href="<?php echo $cetak; ?>/${data}" class="btn btn-primary btn-circle btn-sm" title="Cetak Tanda Terima"><i class="fas fa-print"></i></a>
+                            `;
                         return button;
                     }
                 }
             ],
         });
     }); 
+
+    $('#update').on('click', function(e) {
+        let data = $('#form_status').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo $update; ?>',
+            data: { id: $('#id').val(), data: data }
+        })
+        .done(function(result) {
+            $('#addModal').modal('toggle');
+            if(!result.error) {
+                $('#tab-alert').append(`
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>${result.data} </strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>`);
+            } else {
+                $('#tab-alert').append(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>${result.data} </strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>`);
+            }
+            setTimeout(() => {
+                $('.alert').alert('close');
+            }, 1500);
+        });
+    })
+
+    $('#addModal').on('hidden.bs.modal', function(e) {
+        $('#dataTable').DataTable().ajax.reload();
+        $('#form_status').trigger('reset');
+        $('#save').css('display', 'block');
+        $('#update').css('display', 'none');
+    })
+
+    $('#addModal').on('show.bs.modal', function(e) {
+        let currentDate = new Date();
+        let dateTime    =   currentDate.getDate() + '.' +
+                            (currentDate.getMonth() + 1) + '.' +
+                            currentDate.getFullYear() + '.' +
+                            currentDate.getHours() + '.' +
+                            currentDate.getMinutes() + '.' + currentDate.getSeconds();
+
+        $('#id').val(dateTime);
+    });
 
     function deleteData(data) {
         $.confirm({
@@ -161,7 +217,7 @@
             url: '<?php echo $edit; ?>',
             data: { id: data },
         })
-        .done(function(result) {
+        .done(function(result) {            
             console.log(result);
             $('#addModal').modal('toggle');
             $('#save').css('display', 'none');
@@ -170,16 +226,16 @@
 
             // Field Text
             $('#customer').val(result.data[0].customer);
-            $('#c_address').text(result.data[0].c_address);
-            $('#bilyet_k_detail').text(result.data[0].bilyet_k_detail);
-            $('#bilyet_s_detail').text(result.data[0].bilyet_s_detail);
-            $('#ktp_detail').text(result.data[0].ktp_detail);
-            $('#bank_evidence_detail').text(result.data[0].bank_evidence_detail);
-            $('#family_card_detail').text(result.data[0].family_card_detail);
-            $('#receipt_detail').text(result.data[0].receipt_detail);
-            $('#passport_detail').text(result.data[0].passport_detail);
-            $('#power_of_attorney_detail').text(result.data[0].power_of_attorney_detail);
-            $('#letter_bill_detail').text(result.data[0].letter_bill_detail);
+            $('#c_address').text(decodeURI(result.data[0].c_address));
+            $('#bilyet_k_detail').text(decodeURI(result.data[0].bilyet_k_detail));
+            $('#bilyet_s_detail').text(decodeURI(result.data[0].bilyet_s_detail));
+            $('#ktp_detail').text(decodeURI(result.data[0].ktp_detail));
+            $('#bank_evidence_detail').text(decodeURI(result.data[0].bank_evidence_detail));
+            $('#family_card_detail').text(decodeURI(result.data[0].family_card_detail));
+            $('#receipt_detail').text(decodeURI(result.data[0].receipt_detail));
+            $('#passport_detail').text(decodeURI(result.data[0].passport_detail));
+            $('#power_of_attorney_detail').text(decodeURI(result.data[0].power_of_attorney_detail));
+            $('#letter_bill_detail').text(decodeURI(result.data[0].letter_bill_detail));
             $('#amount').val(result.data[0].amount);
             $('#other_document').val(result.data[0].other_document);
 
@@ -191,58 +247,9 @@
             $('#family_card').attr('checked', result.data[0].family_card);
             $('#receipt').attr('checked', result.data[0].receipt);
             $('#passport').attr('checked', result.data[0].passport);
-            $('#power_of_attorney').attr('checked', result.data[0].power_of_attorney);
+            $("input[name='power_of_attorney'][value='"+result.data[0].power_of_attorney+"']").prop('checked', 1);
             $('#letter_bill').attr('checked', result.data[0].letter_bill);
         })
     }
-
-    $('#update').on('click', function(e) {
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo $update; ?>',
-            data: { id_rig: $('#id_rig').val(), name_rig: $('#name_rig').val() }
-        })
-        .done(function(result) {
-            $('#addModal').modal('toggle');
-            if(!result.error) {
-                $('#tab-alert').append(`
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>${result.data} </strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>`);
-            } else {
-                $('#tab-alert').append(`
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>${result.data} </strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>`);
-            }
-            setTimeout(() => {
-                $('.alert').alert('close');
-            }, 1500);
-        });
-    })
-
-    $('#addModal').on('hidden.bs.modal', function(e) {
-        $('#dataTable').DataTable().ajax.reload();
-        $('#form_status').trigger('reset');
-        $('#save').css('display', 'block');
-        $('#update').css('display', 'none');
-    })
-
-    $('#addModal').on('show.bs.modal', function(e) {
-        let currentDate = new Date();
-        let dateTime    =   currentDate.getDate() + '.' +
-                            (currentDate.getMonth() + 1) + '.' +
-                            currentDate.getFullYear() + '.' +
-                            currentDate.getHours() + '.' +
-                            currentDate.getMinutes() + '.' + currentDate.getSeconds();
-
-        $('#id').val(dateTime);
-    });
 
 </script>

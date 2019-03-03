@@ -29,6 +29,7 @@ class M_Rig extends MY_Controller
             'delete'    => site_url($this->_module . '/deleteData'),
             'edit'      => site_url($this->_module . '/editData'),
             'update'    => site_url($this->_module . '/updateData'),
+            'cetak'     => site_url( $this->_module . '/printData'),
         );
 
         $this->load->view('welcome_message', $data);
@@ -65,9 +66,20 @@ class M_Rig extends MY_Controller
 
     public function updateData()
     {
-        $id_rig      = $this->input->post($this->_id);
-        $name_rig    = $this->input->post('name_rig');
-        return master::updateData(array('name_rig' => $name_rig), array($this->_id => $id_rig), $this->_table);
+        $array_val  = array();
+        $id         = $this->input->post('id');
+        $data       = $this->input->post('data');
+        $data_arr   = explode("&", $data);        
+        foreach ($data_arr as $key => $value) {
+            $data_arr_d   = explode("=", $value);            
+            $array_val[$data_arr_d[0]] = $data_arr_d[1];
+        }
+        return master::updateData($array_val, array('id' => $id), $this->_table);
+    }
+
+    public function printData( $id = '')
+    {
+        master::cetak('HTML', '');
     }
 }
 
