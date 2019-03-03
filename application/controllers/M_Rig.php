@@ -79,7 +79,7 @@ class M_Rig extends MY_Controller
 
     public function printData( $id = '')
     {
-        master::cetak('HTML', '');
+        master::cetak('html');
     }
 }
 
