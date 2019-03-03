@@ -53,3 +53,16 @@
 </table>
 <div style="padding-bottom: 32px;"></div>
 <h4 style="text-align: center"><font size="7">No. Urut <?php echo $row->numbering;?></font></h4>
+
+<table width="80%" align="center">
+	<tr>
+		<td width="50%" align="center">Penerima</td>
+		<td width="50%" align="center">Pemilik</td>
+	</tr>
+</table>
+<table width="80%" align="center" border="1" style="border-collapse: collapse">
+	<tr>
+		<td width="50%" style="padding-top: 85px;"></td>
+		<td width="50%"></td>
+	</tr>
+</table>

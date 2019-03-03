@@ -167,6 +167,11 @@
 </table>
 
 <div style="margin-top: 64px;"></div>
+<table align="right">
+	<tr>
+		<td width="50%">Pemilik</td>
+	</tr>
+</table>
 <table align="right" width="25%" style="border-collapse: collapse" border="1" height="5%">
     <tr>
         <td style="padding-top: 75px"></td>
