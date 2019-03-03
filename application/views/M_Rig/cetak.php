@@ -1,3 +1,9 @@
+<table align="left">
+    <tr>
+        <td><b><font size="3">No. Urut <?php echo $numbering; ?></font></b></td>
+    </tr>
+</table>
+
 <table align="right">
     <tr>
         <td><font size="3">Jakarta, <?php echo $date; ?></font></td>
@@ -70,7 +76,7 @@
 
 <table align="left" style="padding-top: 8px; align: justify">
     <tr>
-        <td><font style="line-height: 1.5;">Dengan ini mengajukan tagihan kepada Pengurus PT. Solusi Balad Lumampah ( Dalam PKPU ) & Aom Juang Wibowo ( Dalam PKPU ) sebesar Rp. <b><?php echo $nominal; ?></b> yang berdasarkan Bukti Transfer Bank / Kwitansi / Lainnya</font></td>
+        <td><font style="line-height: 1.5;">Dengan ini mengajukan tagihan kepada Pengurus PT. Solusi Balad Lumampah ( Dalam PKPU ) & Aom Juang Wibowo ( Dalam PKPU ) sebesar <b>Rp. <?php echo number_format($nominal, 2); ?></b> yang berdasarkan Bukti Transfer Bank / Kwitansi / Lainnya</font></td>
     </tr>
 </table>
 

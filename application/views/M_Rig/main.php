@@ -96,7 +96,11 @@
                 dataSrc: 'data'
             },
             columns: [
-                { data: 'numbering'},
+                { data: 'id', 
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
                 { data: 'customer', },
                 { data: 'c_address', 
                     render: function(data) {
@@ -115,7 +119,8 @@
                                 <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm" title="Hapus Data"><i class="fas fa-trash"></i></button>
                             <?php endif; ?>
                             <button onclick="editData('${data}')" class="btn btn-warning btn-circle btn-sm" title="Ubah Data"><i class="fas fa-pen"></i></button>
-                            <a target="_blank" href="<?php echo $cetak; ?>/${data}" class="btn btn-primary btn-circle btn-sm" title="Cetak Tanda Terima"><i class="fas fa-print"></i></a>
+                            <a target="_blank" href="<?php echo $cetak; ?>/${data}" class="btn btn-primary btn-circle btn-sm" title="Cetak Surat Pengajuan Tagihan"><i class="fas fa-print"></i></a>
+                            <a target="_blank" href="<?php echo $cetak_pe; ?>/${data}" class="btn btn-info btn-circle btn-sm" title="Cetak Tanda Terima"><i class="fas fa-print"></i></a>
                             `;
                         return button;
                     }
@@ -225,7 +230,6 @@
             data: { id: data },
         })
         .done(function(result) {            
-            console.log(result);
             $('#addModal').modal('toggle');
             $('#save').css('display', 'none');
             $('#update').css('display', 'block');

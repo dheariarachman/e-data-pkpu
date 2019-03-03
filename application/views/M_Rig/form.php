@@ -19,14 +19,14 @@
 					</div>
 
 					<div class="form-group">
-					<div class="form-row">
-						<div class="col">
-						<input type="text" class="form-control" id="birth_city" aria-describedby="id_help" name="birth_city" autocomplete="off" placeholder="Tempat Lahir">
-						</div>
-						<div class="col">
-						<input type="text" class="form-control" id="birth_date" aria-describedby="id_help" name="birth_date" autocomplete="off" placeholder="Tanggal Lahir">
-						</div>
-					</div>												
+						<div class="form-row">
+							<div class="col">
+								<input type="text" class="form-control" id="birth_city" aria-describedby="id_help" name="birth_city" autocomplete="off" placeholder="Tempat Lahir">
+							</div>
+							<div class="col">
+								<input type="text" class="form-control" id="birth_date" aria-describedby="id_help" name="birth_date" autocomplete="off" placeholder="Tanggal Lahir">
+							</div>
+						</div>												
 					</div>
 
 					<div class="form-group">
@@ -71,20 +71,22 @@
 
 					<div class="form-group row">
 						<div class="col-sm-3">BILYET S</div>
-						<div class="col-sm-9">
+						<div class="col-sm-3">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="bilyet_s" name="bilyet_s" value="1">
 								<label class="form-check-label" for="gridCheck1">
 									Available
 								</label>
-							</div>
+							</div>							
 						</div>
+						<div class="col-sm-2">
+								<input class="form-control" type="number" id="bilyet_s_count" name="bilyet_s_count" placeholder="Jml">
+							</div>
 					</div>
 
 					<div class="form-group row">
 						<label for="Bilyet_K" class="col-sm-3 col-form-label"></label>
 						<div class="col-sm-9">
-							<!-- <input type="text" class="form-control" id="bilyet_s_detail" name="bilyet_s_detail" placeholder="Bilyet S Detail"> -->
 							<textarea name="bilyet_s_detail" id="bilyet_s_detail" cols="30" rows="3" class="form-control" placeholder="Bilyet S Detail"></textarea>
 						</div>
 					</div>

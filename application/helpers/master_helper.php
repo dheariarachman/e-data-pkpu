@@ -74,6 +74,31 @@ class master
         }
     }
 
+    public static function decode_string($array_data = array())
+    {
+        $posts = array();
+        if(!empty($array_data)) {
+            foreach ($array_data as $key => $value) {
+                $posts[$key] = urldecode($value);
+            }
+        }
+        return $posts;
+    }
+
+    public static function escape_string($array_data = array())
+    {
+        
+        $CI =& get_instance();
+        
+        $posts = array();
+        if(!empty($array_data)) {
+            foreach ($array_data as $key => $value) {
+                $posts[$key]    =   $CI->db->escape($value);
+            }
+        }
+        return $posts;
+    }
+
     public static function getDateIndo($date)
     {
         $pecahkan = explode('-', $date);
