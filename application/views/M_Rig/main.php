@@ -27,8 +27,10 @@
                 <thead>
                     <tr>
                         <th width="2%">No</th>
-                        <th width="15%">Nama</th>
-                        <th width="25%">Alamat</th>
+                        <th width="12%">Nama</th>
+                        <th width="15%">Alamat</th>
+                        <th width="8%">Kuasa</th>
+                        <th width="5%">No. Urut</th>
                         <th width="5%">Total Tagihan</th>
                         <th width="10%">Aksi</th>
                     </tr>
@@ -89,24 +91,38 @@
         });
 
         $('#dataTable').DataTable({
+            aaSorting: [[4, 'desc']],
             processing: true,
             serverSide: true,
             ajax: {
                 url: '<?php echo site_url($class . '/getData') ?>',
                 dataSrc: 'data'
-            },
+            },            
             columns: [
                 { data: 'id', 
                     render: function(data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
-                    }
+                    },
+                    sortable: false,
+                    orderable: false,
                 },
-                { data: 'customer', },
+                { data: 'customer', sortable: true, orderable: true },
                 { data: 'c_address', 
                     render: function(data) {
                         return decodeURI(data)
                     }
                 },
+                { 
+                    data: 'power_of_attorney_detail',
+                    render: function(data, type, row) {
+                        if(data == '') {
+                            return '-';
+                        } else {
+                            return data;
+                        }
+                    }
+                },
+                { data: 'numbering' },
                 { data: 'amount' ,
                     render: function(data, type, row) {
                         return $.number(data)
@@ -239,6 +255,7 @@
             $('#customer').val(result.data[0].customer);
             $('#c_address').text(decodeURI(result.data[0].c_address));
             $('#bilyet_k_detail').text(decodeURI(result.data[0].bilyet_k_detail));
+            $('#bilyet_s_count').val(decodeURI(result.data[0].bilyet_s_count));
             $('#bilyet_s_detail').text(decodeURI(result.data[0].bilyet_s_detail));
             $('#ktp_detail').text(decodeURI(result.data[0].ktp_detail));
             $('#bank_evidence_detail').text(decodeURI(result.data[0].bank_evidence_detail));
