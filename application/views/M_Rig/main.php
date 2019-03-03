@@ -248,6 +248,7 @@
             let date      = new Date(result.data[0].birth_date);            
             let newDate = date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear();
             $('#birth_date').val(newDate);
+            $('#id_jamaah').val(result.data[0].id_jamaah);
 
             $('#phone_number').val(result.data[0].phone_number);
             $('#email').val(result.data[0].email);

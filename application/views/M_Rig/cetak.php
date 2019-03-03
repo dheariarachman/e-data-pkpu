@@ -42,6 +42,11 @@
         <td style="padding: 4px;"><font size="3"><?php echo $name; ?></font></td>
     </tr>
     <tr>
+        <td style="padding: 4px;"><font size="3">ID Jamaah</font></td>
+        <td width="2">:</td>
+        <td style="padding: 4px;"><font size="3"><?php echo $id_jamaah; ?></font></td>
+    </tr>
+    <tr>
         <td style="padding: 4px;"><font size="3">Tempat / Tanggal Lahir</font></td>
         <td width="2">:</td>
         <td style="padding: 4px;"><font size="3"> <?php echo $birth_city; ?>, <?php echo $birth_date; ?></font></td>

@@ -112,6 +112,7 @@ class M_Rig extends MY_Controller
             'birth_city'        => $getDataById[0]->birth_city,
             'phone_number'      => $getDataById[0]->phone_number,
             'email'             => $getDataById[0]->email,
+            'id_jamaah'         => $getDataById[0]->id_jamaah,
         );
         $html = $this->load->view($this->_module . '/cetak', $data, true);
    

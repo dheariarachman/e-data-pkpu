@@ -19,11 +19,18 @@
 					</div>
 
 					<div class="form-group">
+					<div class="form-row">
+						<div class="col">
 						<input type="text" class="form-control" id="birth_city" aria-describedby="id_help" name="birth_city" autocomplete="off" placeholder="Tempat Lahir">
+						</div>
+						<div class="col">
+						<input type="text" class="form-control" id="birth_date" aria-describedby="id_help" name="birth_date" autocomplete="off" placeholder="Tanggal Lahir">
+						</div>
+					</div>												
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="birth_date" aria-describedby="id_help" name="birth_date" autocomplete="off" placeholder="Tanggal Lahir">
+						<input type="text" class="form-control" id="id_jamaah" aria-describedby="id_help" name="id_jamaah" autocomplete="off" placeholder="ID Jamaah">
 					</div>
 
 					<div class="form-group">
