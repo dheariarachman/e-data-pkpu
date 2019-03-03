@@ -31,7 +31,7 @@
 	            $arr[] = array('KWITANSI PEMBAYARAN',$row->receipt,$row->receipt_detail);
 	            $arr[] = array('PASSPORT',$row->passport,$row->passport_detail);
 	            $arr[] = array('SURAT KUASA',$row->power_of_attorney,$row->power_of_attorney_detail);
-	            $arr[] = array('SURAT PENGAJUAN TAGIHAN',$row->letter_bill,$row->letter_bill_detail);
+	            $arr[] = array('SURAT PENGAJUAN TAGIHAN',$row->letter_bill,number_format($row->letter_bill_detail, 2));
 	        }
 
 

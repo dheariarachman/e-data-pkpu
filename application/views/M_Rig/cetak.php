@@ -155,7 +155,7 @@
         <td>9</td>
         <td>Surat Pengajuan Tagihan </td>
         <td style="border:1px solid black"><?php echo $letter_bill == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $letter_bill_detail; ?></td>
+        <td style="border:1px solid black"><?php echo number_format($letter_bill_detail, 2); ?></td>
     </tr>
 
     <tr>
