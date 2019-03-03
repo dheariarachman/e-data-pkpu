@@ -4,6 +4,30 @@ class master
 {
 
     private static $_json = 'application/json';
+    private static $bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+    );
+    
+    private static $_day = array(
+        'Sun'   => 'Minggu',
+        'Mon'   => 'Senin',
+        'Thu'   => 'Selasa',
+        'Wed'   => 'Rabu',
+        'Thu'   => 'Kamis',
+        'Fri'   => 'Jumat',
+        'Sat'   => 'Sabtu',
+    );
 
     private static function status($data)
     {
@@ -48,6 +72,15 @@ class master
         } else {
             return 500;
         }
+    }
+
+    public static function getDateIndo($date)
+    {
+        $pecahkan = explode('-', $date);
+
+        return self::$_day[$pecahkan[0]] . ' ' . $pecahkan[3] . ' ' . self::$bulan [ (int)$pecahkan[2] ] . ' ' . $pecahkan[1];
+
+        // return $day = date('D', $date);
     }
 
     private static function responseData($errStatus = '', $dataRes = '', $recordRows = '', $recordsFiltered = '')

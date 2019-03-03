@@ -79,7 +79,13 @@ class M_Rig extends MY_Controller
 
     public function printData( $id = '')
     {
-        master::cetak('html');
+        $data = array(
+            'date' => master::getDateIndo(date('D-Y-m-d')),
+            'nominal'   => 250000
+        );
+        $html = $this->load->view($this->_module . '/cetak', $data, true);
+   
+        master::cetak($html);
     }
 }
 
