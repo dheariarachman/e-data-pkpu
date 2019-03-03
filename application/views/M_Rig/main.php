@@ -45,8 +45,15 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('#birth_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeYear: true,            
+        });
+
         $('#amount').number(true);
         $('#amount').ForceNumericOnly();
+        $('#phone_number').ForceNumericOnly();
 
         $('#form_status').on('submit', function(e) {
             e.preventDefault();         
@@ -237,6 +244,13 @@
             $('#power_of_attorney_detail').text(decodeURI(result.data[0].power_of_attorney_detail));
             $('#letter_bill_detail').text(decodeURI(result.data[0].letter_bill_detail));
             $('#amount').val(result.data[0].amount);
+            $('#birth_city').val(result.data[0].birth_city);
+            let date      = new Date(result.data[0].birth_date);            
+            let newDate = date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear();
+            $('#birth_date').val(newDate);
+
+            $('#phone_number').val(result.data[0].phone_number);
+            $('#email').val(result.data[0].email);
             $('#other_document').val(result.data[0].other_document);
 
             // Checkbox

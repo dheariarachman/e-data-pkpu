@@ -13,8 +13,25 @@
 					<div class="form-group">
 						<input type="text" class="form-control" id="id" aria-describedby="id_help" name="id" autocomplete="off" readonly>
 					</div>
+
 					<div class="form-group">
 						<input type="text" class="form-control" id="customer" placeholder="Nama Jamaah" name="customer" autocomplete="off">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="birth_city" aria-describedby="id_help" name="birth_city" autocomplete="off" placeholder="Tempat Lahir">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="birth_date" aria-describedby="id_help" name="birth_date" autocomplete="off" placeholder="Tanggal Lahir">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="phone_number" placeholder="No. Handphone" name="phone_number" autocomplete="off">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="email" placeholder="Email" name="email" autocomplete="off">
 					</div>
 
 					<div class="form-group">

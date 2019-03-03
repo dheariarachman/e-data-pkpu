@@ -79,9 +79,15 @@ class master
         $pecahkan = explode('-', $date);
 
         return self::$_day[$pecahkan[0]] . ' ' . $pecahkan[3] . ' ' . self::$bulan [ (int)$pecahkan[2] ] . ' ' . $pecahkan[1];
-
-        // return $day = date('D', $date);
     }
+
+    public static function getDateIndoDMY($date)
+    {
+        $pecahkan = explode('-', $date);
+
+        return $pecahkan[0] . ' ' . self::$bulan [ (int)$pecahkan[1] ] . ' ' . $pecahkan[2];
+    }
+    
 
     private static function responseData($errStatus = '', $dataRes = '', $recordRows = '', $recordsFiltered = '')
     {
