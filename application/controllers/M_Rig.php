@@ -90,8 +90,7 @@ class M_Rig extends MY_Controller
 
     public function printData( $id = '')
     {
-        $getDataById = $this->master_model->getById(array('id' => $id), $this->_table)->result();
-        // print_debug($getDataById[0]);
+        $getDataById = $this->master_model->getById(array('id' => $id), $this->_table)->result();        
         $data = array(
             'date'      => master::getDateIndo(date('D-Y-m-d')),
             'nominal'   => $getDataById[0]->amount,
