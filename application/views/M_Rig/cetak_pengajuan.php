@@ -22,7 +22,6 @@
 	<tbody>
 
 		<?php
-
 			foreach($cetak->result() as $row) {
 	            $arr[] = array('BILYET K',$row->bilyet_k,$row->bilyet_k_detail);
 	            $arr[] = array('BILYET S',$row->bilyet_s,$row->bilyet_s_detail);
@@ -35,8 +34,6 @@
 				$arr[] = array('SURAT PENGAJUAN TAGIHAN',$row->letter_bill,number_format($row->letter_bill_detail, 2));
 				$arr[] = array('DOKUMEN TAMBAHAN','',$row->other_document);
 	        }
-
-
 		?>
 		 
 	

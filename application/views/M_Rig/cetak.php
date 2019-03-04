@@ -1,6 +1,6 @@
 <table align="left">
     <tr>
-        <td><b><font size="7">No. Urut <?php echo $numbering; ?></font></b></td>
+        <td><b><font size="5">No. Urut <?php echo $numbering; ?></font></b></td>
     </tr>
 </table>
 
@@ -80,7 +80,7 @@
     </tr>
 </table>
 
-<table align="left" style="padding-top: 32spx;">
+<table align="left" style="padding-top: 16px;">
     <tr>
         <td>Bersama ini kami lampirkan bukti pendukung berupa : </td>
     </tr>
@@ -166,7 +166,7 @@
     </tr>
 </table>
 
-<div style="margin-top: 64px;"></div>
+<div style="margin-top: 32px;"></div>
 <table align="right">
 	<tr>
 		<td width="75%">Hormat Kami, </td>
