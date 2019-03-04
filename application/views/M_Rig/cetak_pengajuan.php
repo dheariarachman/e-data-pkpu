@@ -26,12 +26,14 @@
 			foreach($cetak->result() as $row) {
 	            $arr[] = array('BILYET K',$row->bilyet_k,$row->bilyet_k_detail);
 	            $arr[] = array('BILYET S',$row->bilyet_s,$row->bilyet_s_detail);
-	            $arr[] = array('KTP',$row->ktp,$row->ktp_detail);
+				$arr[] = array('KTP',$row->ktp,$row->ktp_detail);
+				$arr[] = array('BUKTI SETOR BANK',$row->bank_evidence,$row->bank_evidence_detail);
 	            $arr[] = array('KARTU KELUARGA',$row->family_card,$row->family_card_detail);
 	            $arr[] = array('KWITANSI PEMBAYARAN',$row->receipt,$row->receipt_detail);
 	            $arr[] = array('PASSPORT',$row->passport,$row->passport_detail);
 	            $arr[] = array('SURAT KUASA',($row->power_of_attorney == 3) ? 1 : 0,$row->power_of_attorney_detail);
-	            $arr[] = array('SURAT PENGAJUAN TAGIHAN',$row->letter_bill,number_format($row->letter_bill_detail, 2));
+				$arr[] = array('SURAT PENGAJUAN TAGIHAN',$row->letter_bill,number_format($row->letter_bill_detail, 2));
+				$arr[] = array('DOKUMEN TAMBAHAN','',$row->other_document);
 	        }
 
 
