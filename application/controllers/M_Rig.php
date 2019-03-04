@@ -49,15 +49,11 @@ class M_Rig extends MY_Controller
         $this->form_validation->set_rules('customer', 'Nama Jamaah', 'trim|required');
         
         if ($this->form_validation->run() == true) {
-
-            $birth_date     = $this->input->post('birth_date');
-
-            $n_birth_date   = date('Y-m-d', strtotime($birth_date));
-
-            $email          = $this->input->post('email');
-
-            $data = master::decode_string($this->input->post());
+            $birth_date         = $this->input->post('birth_date');
+            $n_birth_date       = date('Y-m-d', strtotime($birth_date));
+            $data               = master::decode_string($this->input->post());
             $data['birth_date'] = $n_birth_date;
+            // print_debug($data);
             return master::saveData($data, $this->_table);
         }
     }

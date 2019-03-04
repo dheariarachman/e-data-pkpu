@@ -169,9 +169,7 @@
     }); 
 
     $('#update').on('click', function(e) {
-        let data = $('#form_status input').filter(function() {
-            return this.value;
-        }).serialize();
+        let data = $('#form_status').serialize();
         $.ajax({
             type: 'POST',
             url: '<?php echo $update; ?>',
