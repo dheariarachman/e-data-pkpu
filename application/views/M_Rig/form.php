@@ -50,11 +50,13 @@
 					<div class="form-group row">
 						<div class="col-sm-3">BILYET K</div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="bilyet_k" name="bilyet_k" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="bilyet_k2" name="bilyet_k" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="bilyet_k2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="bilyet_k3" name="bilyet_k" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="bilyet_k3">Not Available</label>
 							</div>
 						</div>
 					</div>
@@ -71,17 +73,19 @@
 
 					<div class="form-group row">
 						<div class="col-sm-3">BILYET S</div>
-						<div class="col-sm-3">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="bilyet_s" name="bilyet_s" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
-							</div>							
-						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-9">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="bilyet_s2" name="bilyet_s" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="bilyet_s2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="bilyet_s3" name="bilyet_s" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="bilyet_s3">Not Available</label>
+							</div>
+							<div class="custom-control custom-control-inline">
 								<input class="form-control" type="number" id="bilyet_s_count" name="bilyet_s_count" placeholder="Jml">
 							</div>
+						</div>
 					</div>
 
 					<div class="form-group row">
@@ -96,11 +100,13 @@
 					<div class="form-group row">
 						<div class="col-sm-3">KTP</div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="ktp" name="ktp" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="ktp2" name="ktp" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="ktp2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="ktp3" name="ktp" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="ktp3">Not Available</label>
 							</div>
 						</div>
 					</div>
@@ -118,11 +124,13 @@
 					<div class="form-group row">
 						<div class="col-sm-3">Bukti Setor Bank</div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="bank_evidence" name="bank_evidence" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="bank_evidence2" name="bank_evidence" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="bank_evidence2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="bank_evidence3" name="bank_evidence" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="bank_evidence3">Not Available</label>
 							</div>
 						</div>
 					</div>
@@ -141,11 +149,13 @@
 					<div class="form-group row">
 						<div class="col-sm-3">Kartu Keluarga</div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="family_card" name="family_card" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="family_card2" name="family_card" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="family_card2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="family_card3" name="family_card" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="family_card3">Not Available</label>
 							</div>
 						</div>
 					</div>
@@ -163,11 +173,13 @@
 					<div class="form-group row">
 						<div class="col-sm-3">Kwitansi Pembayaran</div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="receipt" name="receipt" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="receipt2" name="receipt" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="receipt2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="receipt3" name="receipt" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="receipt3">Not Available</label>
 							</div>
 						</div>
 					</div>
@@ -185,11 +197,13 @@
 					<div class="form-group row">
 						<div class="col-sm-3">Passport</div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="passport" name="passport" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="passport2" name="passport" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="passport2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="passport3" name="passport" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="passport3">Not Available</label>
 							</div>
 						</div>
 					</div>
@@ -219,27 +233,6 @@
 								<input type="radio" id="power_of_attorney4" name="power_of_attorney" class="custom-control-input" value="3">
 								<label class="custom-control-label" for="power_of_attorney4">Available</label>
 							</div>
-
-							<!-- <div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="power_of_attorney" name="power_of_attorney" value="1">
-					        <label class="form-check-label" for="gridCheck1">
-					          Available
-					        </label>
-								</div>
-								
-								<div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="power_of_attorney" name="power_of_attorney" value="2">
-					        <label class="form-check-label" for="gridCheck1">
-					          Require
-					        </label>
-								</div>
-								
-								<div class="form-check">
-					        <input class="form-check-input" type="checkbox" id="power_of_attorney" name="power_of_attorney" value="3">
-					        <label class="form-check-label" for="gridCheck1">
-					          Principle
-					        </label>
-					      </div> -->
 						</div>
 					</div>
 
@@ -255,15 +248,15 @@
 					<!-- letter bill -->
 
 					<div class="form-group row">
-						<div class="col-sm-3">
-							<font size="2">Surat Pengajuan Tagihan</font>
-						</div>
+						<div class="col-sm-3"><font size="2">Surat Pengajuan Tagihan</font></div>
 						<div class="col-sm-9">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="letter_bill" name="letter_bill" value="1">
-								<label class="form-check-label" for="gridCheck1">
-									Available
-								</label>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="letter_bill2" name="letter_bill" class="custom-control-input" value="1">
+								<label class="custom-control-label" for="letter_bill2">Available</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="letter_bill3" name="letter_bill" class="custom-control-input" value="0">
+								<label class="custom-control-label" for="letter_bill3">Not Available</label>
 							</div>
 						</div>
 					</div>
