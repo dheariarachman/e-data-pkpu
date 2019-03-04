@@ -45,7 +45,7 @@ class M_Rig extends MY_Controller
     {
         $this->form_validation->set_rules($this->_id, 'ID', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
         $this->form_validation->set_rules('customer', 'Nama Jamaah', 'trim|required');
-        $this->form_validation->set_rules('c_address', 'Alamat Jamaah', 'trim|required');
+        // $this->form_validation->set_rules('c_address', 'Alamat Jamaah', 'trim|required');
         
         if ($this->form_validation->run() == true) {
 
