@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     class Master_model extends MY_Model {
 
-        public function cetak_rig($id) {
+        public function cetak_rig($id, $table) {
 			$this->db->select('*');
-			$this->db->from('m_data');
+			$this->db->from($table);
 			$this->db->where('id',$id);
 			$query = $this->db->get();
 
@@ -21,9 +21,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		public function generateDatatablesPerusahaan()
 		{
-			$this->datatables->select('numbering, id_jamaah, customer, c_address, phone_number, power_of_attorney_detail, amount, id');
-			$this->datatables->from('m_data');
-			$this->datatables->where('is_company', '1');
+			$this->datatables->select('id, numbering, name, instansi, job_title, address, phone_number, email');
+			$this->datatables->from('m_data_perusahaan');
 			return $this->datatables->generate();
 		}
     }

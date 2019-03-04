@@ -96,7 +96,7 @@
                     }
                 },
                 {"data": "amount", 
-                    render: $.fn.dataTable.render.number(',', '.', '00')},
+                    render: $.fn.dataTable.render.number(',', '.', '')},
                 {
                     "data": "id",
                     render: function (data, type, row) {
@@ -122,6 +122,7 @@
         });
  
     });
+
     $(document).ready(function () {
 
         $('#birth_date').datepicker({
@@ -307,7 +308,7 @@
 
             $('#phone_number').val(result.data[0].phone_number);
             $('#email').val(result.data[0].email);
-            $('#other_document').val(result.data[0].other_document);
+            $('#other_document').text(result.data[0].other_document);
 
             // Radio Button
             $("input[name='bilyet_k'][value='"+result.data[0].bilyet_k+"']").prop('checked', 1);

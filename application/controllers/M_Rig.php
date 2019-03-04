@@ -53,7 +53,6 @@ class M_Rig extends MY_Controller
             $n_birth_date       = date('Y-m-d', strtotime($birth_date));
             $data               = master::decode_string($this->input->post());
             $data['birth_date'] = $n_birth_date;
-            // print_debug($data);
             return master::saveData($data, $this->_table);
         }
     }
@@ -130,7 +129,7 @@ class M_Rig extends MY_Controller
 
     public function printDataRig( $id = '')
     {
-        $data['cetak'] = $this->master_model->cetak_rig($id);
+        $data['cetak'] = $this->master_model->cetak_rig($id, $this->_table);
         master::cetak($this->load->view($this->_module . '/cetak_pengajuan', $data, true), '');
     }
 }

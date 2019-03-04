@@ -5,11 +5,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Perusahaan extends MY_Controller
 {
 
-    private $_table     = 'm_data';
-    private $_module    = 'M_Rig';
+    private $_table     = 'm_data_perusahaan';
+    private $_module    = 'M_Perusahaan';
     private $_title     = 'Master Entry Data Perusahaan';
 
-    private $_id         = 'id';
+    private $_id        = 'id';
     
     public function __construct()
     {
@@ -30,33 +30,25 @@ class M_Perusahaan extends MY_Controller
             'edit'      => site_url($this->_module . '/editData'),
             'update'    => site_url($this->_module . '/updateData'),
             'cetak'     => site_url($this->_module . '/printData'),
-            'cetak_pe'  => site_url($this->_module . '/printDataRig')
+            'cetak_pe'  => site_url($this->_module . '/printDataRig'),
+            'getData'   => site_url($this->_module . '/getDataNasabah'),
         );
 
         $this->load->view('welcome_message', $data);
     }
 
-    public function getData()
+    public function getDataNasabah()
     {
-        return master::responseGetData($this->_table);
+        $this->output->set_content_type('application/json', 'utf-8');
+        echo $this->master_model->generateDatatablesPerusahaan  ();
     }
 
     public function saveData()
     {
-        $this->form_validation->set_rules($this->_id, 'ID', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
-        $this->form_validation->set_rules('customer', 'Nama Jamaah', 'trim|required');
-        // $this->form_validation->set_rules('c_address', 'Alamat Jamaah', 'trim|required');
+        $this->form_validation->set_rules('name', 'Nama', 'trim|required');
         
         if ($this->form_validation->run() == true) {
-
-            $birth_date     = $this->input->post('birth_date');
-
-            $n_birth_date   = date('Y-m-d', strtotime($birth_date));
-
-            $email          = $this->input->post('email');
-
             $data = master::decode_string($this->input->post());
-            $data['birth_date'] = $n_birth_date;
             return master::saveData($data, $this->_table);
         }
     }
@@ -78,14 +70,11 @@ class M_Perusahaan extends MY_Controller
         $array_val  = array();
         $id         = $this->input->post('id');
         $data       = $this->input->post('data');
-        $data_arr   = explode("&", $data);        
+        $data_arr   = explode("&", $data);
         foreach ($data_arr as $key => $value) {
             $data_arr_d   = explode("=", $value);            
-            $array_val[$data_arr_d[0]] = urldecode($data_arr_d[1]);
+            $array_val[$data_arr_d[0]] = $data_arr_d[1];
         }
-        
-        $n_birth_date   = date('Y-m-d', strtotime($array_val['birth_date']));
-        $array_val['birth_date'] = $n_birth_date;
         return master::updateData(master::decode_string($array_val), array('id' => $id), $this->_table);
     }
 
@@ -125,15 +114,36 @@ class M_Perusahaan extends MY_Controller
             'id_jamaah'         => $getDataById[0]->id_jamaah,
             'numbering'         => $getDataById[0]->numbering,
         );
-        $html = $this->load->view($this->_module . '/cetak', $data, true);
+        $html = $this->load->view($this->_module . '/cetak_surat_pengajuan', $data, true);
    
         master::cetak($html);
     }
 
     public function printDataRig( $id = '')
     {
-        $data['cetak'] = $this->master_model->cetak_rig($id);
-        master::cetak($this->load->view($this->_module . '/cetak_pengajuan', $data, true), '');
+        $data_result = $this->master_model->cetak_rig($id, $this->_table);
+        $_result        = $data_result->result();
+        $data['id']         = $_result[0]->id;
+        $data['numbering']  = $_result[0]->numbering;
+        $data['result']     = $_result[0];
+
+        $arr = array();
+        foreach ($_result as $row ) {
+            $arr[] = array('Permohonan Tagihan',$row->permohonan_tagihan,$row->permohonan_tagihan_detail);
+            $arr[] = array('KTP ( Jika Bukan Badan Hukum )',$row->ktp,$row->ktp_detail);
+            $arr[] = array('Surat Kuasa ( Jika Dikuasakan )',$row->power_of_attorney,$row->power_of_attorney_detail);
+            $arr[] = array('Fotocopy KTP Pemberi Kuasa',$row->fc_ktp_attorney,$row->fc_ktp_attorney_detail);
+            $arr[] = array('Fotocopy KTP Penerima Kuasa',$row->fc_ktp_owner,$row->fc_ktp_owner_detail);
+            $arr[] = array('Akte Pendirian',$row->akte_pendirian,$row->akte_pendirian_detail);
+            $arr[] = array('Pengesahan Badan Hukum',$row->pengesahan_badan_hukum,$row->pengesahan_badan_hukum_detail);
+            $arr[] = array('Anggaran Dasar Perseroan',($row->anggaran_dasar_perseroan == 3) ? 1 : 0,$row->anggaran_dasar_perseroan_detail);
+            $arr[] = array('a. Perubahan Pertama',$row->amandement_1, '');
+            $arr[] = array('b. Perubahan Kedua',$row->amandement_2, '');
+            $arr[] = array('c. Perubahan Ketiga',$row->amandement_3, ''); 
+        }
+        $data['cetak'] = $arr;
+	    
+        master::cetak($this->load->view($this->_module . '/cetak_tanda_terima', $data, true), '');
     }
 }
 
