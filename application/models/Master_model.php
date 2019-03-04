@@ -18,7 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->datatables->from('m_data');
 			return $this->datatables->generate();
 		}
-				
+
+		public function generateDatatablesPerusahaan()
+		{
+			$this->datatables->select('numbering, id_jamaah, customer, c_address, phone_number, power_of_attorney_detail, amount, id');
+			$this->datatables->from('m_data');
+			$this->datatables->where('is_company', '1');
+			return $this->datatables->generate();
+		}
     }
 
 /* Mnd of file master_model.MYp */

@@ -26,11 +26,10 @@
             <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th width="2%">No</th>
                         <th width="5%">No. Urut</th>
                         <th width="5%">ID Jamaah</th>
                         <th width="10%">Nama</th>
-                        <th width="8%">Alamat</th>
+                        <th width="10%">Alamat</th>
                         <th width="5%">No. Handphone</th>
                         <th width="10%">Kuasa</th>
                         <th width="8%">Total Tagihan</th>
@@ -81,12 +80,6 @@
                 "type": "POST"
             },
             columns: [
-                { 
-                    "data" : "numbering",
-                    render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    },
-                },
                 {"data": "numbering"},
                 {"data": "id_jamaah"},
                 {"data": "customer"},
