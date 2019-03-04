@@ -205,6 +205,17 @@
         $('#form_status').trigger('reset');
         $('#save').css('display', 'block');
         $('#update').css('display', 'none');
+
+        $('#bilyet_k_detail').text('');
+        $('#bilyet_s_detail').text('');
+        $('#ktp_detail').text('');
+        $('#bank_evidence_detail').text('');
+        $('#family_card_detail').text('');
+        $('#receipt_detail').text('');
+        $('#passport_detail').text('');
+        $('#power_of_attorney_detail').text('');
+        $('#letter_bill_detail').text('');
+        $('#other_document').text('');
     })
 
     $('#addModal').on('show.bs.modal', function(e) {
