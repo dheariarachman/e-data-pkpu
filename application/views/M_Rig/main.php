@@ -23,16 +23,18 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th width="2%">No</th>
-                        <th width="12%">Nama</th>
-                        <th width="15%">Alamat</th>
-                        <th width="8%">Kuasa</th>
                         <th width="5%">No. Urut</th>
-                        <th width="5%">Total Tagihan</th>
-                        <th width="10%">Aksi</th>
+                        <th width="5%">ID Jamaah</th>
+                        <th width="10%">Nama</th>
+                        <th width="8%">Alamat</th>
+                        <th width="5%">No. Handphone</th>
+                        <th width="10%">Kuasa</th>
+                        <th width="8%">Total Tagihan</th>
+                        <th width="8%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +47,88 @@
 <?php $this->load->view($form, array('action' => $action)); ?>
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        // Setup datatables
+        $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
+        {
+            return {
+                "iStart": oSettings._iDisplayStart,
+                "iEnd": oSettings.fnDisplayEnd(),
+                "iLength": oSettings._iDisplayLength,
+                "iTotal": oSettings.fnRecordsTotal(),
+                "iFilteredTotal": oSettings.fnRecordsDisplay(),
+                "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+                "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+            };
+        };
+        
+        var table = $("#mytable").dataTable({
+            initComplete: function() {
+                var api = this.api();
+                $('#mytable_filter input')
+                    .off('.DT')
+                    .on('input.DT', function() {
+                        api.search(this.value).draw();
+                });
+            },
+            oLanguage: {
+                sProcessing: "loading..."
+            },
+            processing: true,
+            serverSide: true,
+            ajax: {
+                "url": "<?php echo $getJson; ?>", 
+                "type": "POST"
+            },
+            columns: [
+                { 
+                    "data" : "numbering",
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    },
+                },
+                {"data": "numbering"},
+                {"data": "id_jamaah"},
+                {"data": "customer"},
+                {"data": "c_address"},
+                {"data": "phone_number"},
+                {
+                    "data": "power_of_attorney_detail",
+                    render: function(data, type, row, meta) {
+                        if(data == '') {
+                            return '-';
+                        } else {
+                            return data;
+                        }
+                    }
+                },
+                {"data": "amount", 
+                    render: $.fn.dataTable.render.number(',', '.', '00')},
+                {
+                    "data": "id",
+                    render: function (data, type, row) {
+                        let button =`
+                            <?php if($this->session->userdata('role') == '99'): ?>
+                                <button onclick="deleteData('${data}')" class="btn btn-danger btn-circle btn-sm" title="Hapus Data"><i class="fas fa-trash"></i></button>
+                            <?php endif; ?>
+                            <button onclick="editData('${data}')" class="btn btn-warning btn-circle btn-sm" title="Ubah Data"><i class="fas fa-pen"></i></button>
+                            <a target="_blank" href="<?php echo $cetak; ?>/${data}" class="btn btn-primary btn-circle btn-sm" title="Cetak Surat Pengajuan Tagihan"><i class="fas fa-print"></i></a>
+                            <a target="_blank" href="<?php echo $cetak_pe; ?>/${data}" class="btn btn-info btn-circle btn-sm" title="Cetak Tanda Terima"><i class="fas fa-print"></i></a>
+                            `;
+                        return button;
+                    }
+                }
+            ],
+            order: [[1, 'asc']],
+            rowCallback: function(row, data, iDisplayIndex) {
+                var info = this.fnPagingInfo();
+                var page = info.iPage;
+                var length = info.iLength;
+                $('td:eq(0)', row).html();
+            }
+        });
+ 
+    });
     $(document).ready(function () {
 
         $('#birth_date').datepicker({

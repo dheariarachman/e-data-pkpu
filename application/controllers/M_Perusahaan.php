@@ -2,12 +2,12 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_Rig extends MY_Controller
+class M_Perusahaan extends MY_Controller
 {
 
     private $_table     = 'm_data';
     private $_module    = 'M_Rig';
-    private $_title     = 'Master Entry Data';
+    private $_title     = 'Master Entry Data Perusahaan';
 
     private $_id         = 'id';
     
@@ -30,23 +30,22 @@ class M_Rig extends MY_Controller
             'edit'      => site_url($this->_module . '/editData'),
             'update'    => site_url($this->_module . '/updateData'),
             'cetak'     => site_url($this->_module . '/printData'),
-            'cetak_pe'  => site_url($this->_module . '/printDataRig'),
-            'getJson'   => site_url($this->_module . '/getDataNasabah')
+            'cetak_pe'  => site_url($this->_module . '/printDataRig')
         );
 
         $this->load->view('welcome_message', $data);
     }
 
-    public function getDataNasabah()
+    public function getData()
     {
-        $this->output->set_content_type('application/json', 'utf-8');
-        echo $this->master_model->generateDatatables();
+        return master::responseGetData($this->_table);
     }
 
     public function saveData()
     {
         $this->form_validation->set_rules($this->_id, 'ID', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
         $this->form_validation->set_rules('customer', 'Nama Jamaah', 'trim|required');
+        // $this->form_validation->set_rules('c_address', 'Alamat Jamaah', 'trim|required');
         
         if ($this->form_validation->run() == true) {
 
