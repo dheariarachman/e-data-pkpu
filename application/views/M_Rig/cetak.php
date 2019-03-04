@@ -147,7 +147,7 @@
     <tr>
         <td>8</td>
         <td>Surat Kuasa </td>
-        <td style="border:1px solid black"><?php echo $power_of_attorney == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
+        <td style="border:1px solid black"><?php echo $power_of_attorney == 3 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
         <td style="border:1px solid black"><?php echo $power_of_attorney_detail; ?></td>
     </tr>
 
