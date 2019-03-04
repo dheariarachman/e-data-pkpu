@@ -76,7 +76,7 @@
 
 <table align="left" style="padding-top: 8px; align: justify">
     <tr>
-        <td><font style="line-height: 1.5;">Dengan ini mengajukan tagihan kepada Pengurus PT. Solusi Balad Lumampah ( Dalam PKPU ) & Aom Juang Wibowo ( Dalam PKPU ) sebesar <b>Rp. <?php echo number_format($nominal, 2); ?></b> yang berdasarkan Bukti Transfer Bank / Kwitansi / Lainnya</font></td>
+        <td><font style="line-height: 1.5;">Dengan ini mengajukan tagihan kepada Pengurus PT. Solusi Balad Lumampah ( Dalam PKPU ) & Aom Juang Wibowo ( Dalam PKPU ) sebesar <b>Rp. <?php echo (!empty($nominal)) ? number_format($nominal, 2) : 0; ?></b> yang berdasarkan Bukti Transfer Bank / Kwitansi / Lainnya</font></td>
     </tr>
 </table>
 
@@ -155,7 +155,7 @@
         <td>9</td>
         <td>Surat Pengajuan Tagihan </td>
         <td style="border:1px solid black"><?php echo $letter_bill == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo number_format($letter_bill_detail, 2); ?></td>
+        <td style="border:1px solid black"><?php echo (!empty($letter_bill_detail)) ? number_format($letter_bill_detail, 2) : '-'; ?></td>
     </tr>
 
     <tr>
@@ -169,7 +169,7 @@
 <div style="margin-top: 64px;"></div>
 <table align="right">
 	<tr>
-		<td width="50%">Hormat Kami, </td>
+		<td width="75%">Hormat Kami, </td>
 	</tr>
 </table>
 <table align="right" width="25%" style="border-collapse: collapse" border="1" height="5%">
