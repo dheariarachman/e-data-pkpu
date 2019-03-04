@@ -56,8 +56,8 @@
 
 <table width="80%" align="center">
 	<tr>
-		<td width="50%" align="center">Penerima</td>
-		<td width="50%" align="center">Pemilik</td>
+		<td width="50%" align="center">Yang Menerima</td>
+		<td width="50%" align="center">Yang Menyerahkan</td>
 	</tr>
 </table>
 <table width="80%" align="center" border="1" style="border-collapse: collapse">
