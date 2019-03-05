@@ -185,10 +185,12 @@ class master
         $CI =& get_instance();
         $CI->load->model(array('master_model'));
 
+        $numbering = $CI->master_model->getNumbering($data['id'], $table);
+
         $status_deleted     = $CI->master_model->delete($data, $table);
         $response           = self::responseData(!$status_deleted, self::statusDeleted($status_deleted));
 
-        self::_createLogActivity('menghapus data  ' . $table, $data['id']);
+        self::_createLogActivity('menghapus data  ' . $table, 'No. Urut => ' . $numbering->numbering);
         return self::setResponse($response, self::statusCode($status_deleted), self::$_json);
     }
 

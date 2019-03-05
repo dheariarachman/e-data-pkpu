@@ -12,6 +12,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return $query;
 		}
 
+		public function getNumbering($id = '', $table = '')
+		{
+			$this->db->select('numbering');
+			$this->db->from($table);
+			$this->db->where('id' , $id);
+			$query = $this->db->get()->row();
+			return $query;
+		}
+
 		public function generateDatatables()
 		{
 			$this->datatables->select('numbering, id_jamaah, customer, c_address, phone_number, power_of_attorney_detail, amount, id');
