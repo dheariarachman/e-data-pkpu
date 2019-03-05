@@ -57,8 +57,8 @@
 	<?php $no=0; $num=1; ?>
 	<?php foreach ( $cetak as $key => $value ): ?>
 		<tr>
-			<td style="border:1px solid black; text-align: center;"><?php echo $num;?></td>
-			<td style="border:1px solid black"><?php echo $cetak[$no][0]?></td>
+			<td style="border:1px solid black; text-align: center;"><?php echo ($num <= 8) ? $num : '';?></td>
+			<td style="border:1px solid black; padding: 4px"><?php echo $cetak[$no][0]?></td>
 			<td style="border:1px solid black"><?php echo $cetak[$no][1] == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
 			<td style="border:1px solid black"><?php echo $cetak[$no][2]?></td>
 		</tr>
@@ -70,10 +70,21 @@
 
 <table>
 	<tr>
+		<td><b>Perjanjian Kredit : </b></td>
+	</tr>
+	<tr>
+		<td style="padding: 6px"><?php echo nl2br($result->perjanjian_kredit_detail); ?></td>
+	</tr>
+</table>
+
+<div style="margin: 4px;"></div>
+
+<table>
+	<tr>
 		<td><b>Bukti Tagihan dan Bukti Pendukung : </b></td>
 	</tr>
 	<tr>
-		<td><?php echo $result->other_document; ?></td>
+		<td style="padding: 6px"><?php echo nl2br($result->other_document); ?></td>
 	</tr>
 </table>
 

@@ -1,5 +1,13 @@
 <style>
-    table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+
+    table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child, 
+    table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    table.table-bordered.dataTable th, table.table-bordered.dataTable th, table.table-bordered.dataTable td, table.table-bordered.dataTable td {
+        
         vertical-align: middle;
     }
 </style>
@@ -48,19 +56,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         // Setup datatables
-        $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
-        {
-            return {
-                "iStart": oSettings._iDisplayStart,
-                "iEnd": oSettings.fnDisplayEnd(),
-                "iLength": oSettings._iDisplayLength,
-                "iTotal": oSettings.fnRecordsTotal(),
-                "iFilteredTotal": oSettings.fnRecordsDisplay(),
-                "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
-                "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
-            };
-        };
-        
+        loadDatatablesProperty();
         var table = $("#mytable").dataTable({
             initComplete: function() {
                 var api = this.api();
@@ -202,7 +198,7 @@
     })
 
     $('#addModal').on('hidden.bs.modal', function(e) {
-        $('#dataTable').DataTable().ajax.reload();
+        $('#mytable').DataTable().ajax.reload();
         $('#form_status').trigger('reset');
         $('#save').css('display', 'block');
         $('#update').css('display', 'none');
@@ -243,7 +239,7 @@
                         data: { id: data },
                     })
                     .done(function(result) {
-                        $('#dataTable').DataTable().ajax.reload();
+                        $('#mytable').DataTable().ajax.reload();
 
                         if(!result.error) {
                             $('#tab-alert').append(`

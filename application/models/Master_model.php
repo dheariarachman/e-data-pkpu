@@ -28,6 +28,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return $this->datatables->generate();
 		}
 
+		public function generateDatatablesDashboard($where_col = '', $where_val = '')
+		{
+			$this->datatables->select('numbering, id_jamaah, customer, c_address, phone_number, power_of_attorney_detail, amount, id');
+			$this->datatables->from('m_data');
+			if(!empty($where_val)) {
+				$this->datatables->like($where_col, $where_val);
+			}
+			return $this->datatables->generate();
+		}
+
 		public function generateDatatablesPerusahaan()
 		{
 			$this->datatables->select('id, numbering, name, instansi, job_title, address, phone_number, email');

@@ -1,5 +1,12 @@
 <style>
-    table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child, 
+    table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    table.table-bordered.dataTable th, table.table-bordered.dataTable th, table.table-bordered.dataTable td, table.table-bordered.dataTable td {
+        
         vertical-align: middle;
     }
 </style>
@@ -46,21 +53,47 @@
 <?php $this->load->view($form, array('action' => $action)); ?>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        // Setup datatables
-        $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
-        {
-            return {
-                "iStart": oSettings._iDisplayStart,
-                "iEnd": oSettings.fnDisplayEnd(),
-                "iLength": oSettings._iDisplayLength,
-                "iTotal": oSettings.fnRecordsTotal(),
-                "iFilteredTotal": oSettings.fnRecordsDisplay(),
-                "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
-                "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
-            };
-        };
-        
+
+    $(document).ready(function () {
+
+        $('#amount').number(true);
+        $('#amount').ForceNumericOnly();
+        $('#phone_number').ForceNumericOnly();
+
+        $('#form_status').on('submit', function(e) {
+            e.preventDefault();         
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $action; ?>',
+                data: $(this).serialize(),
+            })
+            .done(function(result) {
+                $('#addModal').modal('toggle');
+                
+                if(!result.error) {
+                    $('#tab-alert').append(`
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>${result.data} </strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>`);
+                } else {
+                    $('#tab-alert').append(`
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>${result.data} </strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>`);
+                }
+                setTimeout(() => {
+                    $('.alert').alert('close');
+                }, 1500);
+            })
+        });
+
+        loadDatatablesProperty();        
         var table = $("#mytable").dataTable({
             initComplete: function() {
                 var api = this.api();
@@ -108,46 +141,6 @@
                 var length = info.iLength;
                 $('td:eq(0)', row).html();
             }
-        });
-    });
-
-    $(document).ready(function () {
-
-        $('#amount').number(true);
-        $('#amount').ForceNumericOnly();
-        $('#phone_number').ForceNumericOnly();
-
-        $('#form_status').on('submit', function(e) {
-            e.preventDefault();         
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo $action; ?>',
-                data: $(this).serialize(),
-            })
-            .done(function(result) {
-                $('#addModal').modal('toggle');
-                
-                if(!result.error) {
-                    $('#tab-alert').append(`
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>${result.data} </strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>`);
-                } else {
-                    $('#tab-alert').append(`
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>${result.data} </strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>`);
-                }
-                setTimeout(() => {
-                    $('.alert').alert('close');
-                }, 1500);
-            })
         });
     }); 
 

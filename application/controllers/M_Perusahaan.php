@@ -71,10 +71,11 @@ class M_Perusahaan extends MY_Controller
         $id         = $this->input->post('id');
         $data       = $this->input->post('data');
         $data_arr   = explode("&", $data);
+
         foreach ($data_arr as $key => $value) {
             $data_arr_d   = explode("=", $value);            
             $array_val[$data_arr_d[0]] = $data_arr_d[1];
-        }
+        }        
         return master::updateData(master::decode_string($array_val), array('id' => $id), $this->_table);
     }
 
@@ -127,16 +128,18 @@ class M_Perusahaan extends MY_Controller
         $data['numbering']  = $_result[0]->numbering;
         $data['result']     = $_result[0];
 
+        // print_debug($data['result']);
+
         $arr = array();
         foreach ($_result as $row ) {
-            $arr[] = array('Permohonan Tagihan',$row->permohonan_tagihan,$row->permohonan_tagihan_detail);
-            $arr[] = array('KTP ( Jika Bukan Badan Hukum )',$row->ktp,$row->ktp_detail);
-            $arr[] = array('Surat Kuasa ( Jika Dikuasakan )',$row->power_of_attorney,$row->power_of_attorney_detail);
-            $arr[] = array('Fotocopy KTP Pemberi Kuasa',$row->fc_ktp_attorney,$row->fc_ktp_attorney_detail);
-            $arr[] = array('Fotocopy KTP Penerima Kuasa',$row->fc_ktp_owner,$row->fc_ktp_owner_detail);
-            $arr[] = array('Akte Pendirian',$row->akte_pendirian,$row->akte_pendirian_detail);
-            $arr[] = array('Pengesahan Badan Hukum',$row->pengesahan_badan_hukum,$row->pengesahan_badan_hukum_detail);
-            $arr[] = array('Anggaran Dasar Perseroan',($row->anggaran_dasar_perseroan == 3) ? 1 : 0,$row->anggaran_dasar_perseroan_detail);
+            $arr[] = array('Permohonan Tagihan',$row->permohonan_tagihan,nl2br($row->permohonan_tagihan_detail));
+            $arr[] = array('KTP ( Jika Bukan Badan Hukum )',$row->ktp,nl2br($row->ktp_detail));
+            $arr[] = array('Surat Kuasa ( Jika Dikuasakan )',$row->power_of_attorney,nl2br($row->power_of_attorney_detail));
+            $arr[] = array('Fotocopy KTP Pemberi Kuasa',$row->fc_ktp_attorney,nl2br($row->fc_ktp_attorney_detail));
+            $arr[] = array('Fotocopy KTP Penerima Kuasa',$row->fc_ktp_owner,nl2br($row->fc_ktp_owner_detail));
+            $arr[] = array('Akte Pendirian',$row->akte_pendirian,nl2br($row->akte_pendirian_detail));
+            $arr[] = array('Pengesahan Badan Hukum',$row->pengesahan_badan_hukum,nl2br($row->pengesahan_badan_hukum_detail));
+            $arr[] = array('Anggaran Dasar Perseroan',($row->anggaran_dasar_perseroan == 3) ? 1 : 0,nl2br($row->anggaran_dasar_perseroan_detail));
             $arr[] = array('a. Perubahan Pertama',$row->amandement_1, '');
             $arr[] = array('b. Perubahan Kedua',$row->amandement_2, '');
             $arr[] = array('c. Perubahan Ketiga',$row->amandement_3, ''); 

@@ -60,12 +60,12 @@
     <tr>
         <td style="padding: 4px;"><font size="3">Alamat</font></td>
         <td width="2">:</td>
-        <td style="padding: 4px;"><font size="3"><?php echo $c_address; ?></font></td>
+        <td style="padding: 4px;"><font size="3"><?php echo nl2br($c_address); ?></font></td>
     </tr>
     <tr>
         <td style="padding: 4px;"><font size="3">No. Handphone</font></td>
         <td width="2">:</td>
-        <td style="padding: 4px;"><font size="3"><?php echo $phone_number; ?></font></td>
+        <td style="padding: 4px;"><font size="3"><?php echo nl2br($phone_number); ?></font></td>
     </tr>
     <tr>
         <td style="padding: 4px;"><font size="3">Email</font></td>
@@ -99,70 +99,70 @@
         <td>1</td>
         <td>BILYET K </td>
         <td style="border:1px solid black"><?php echo $bilyet_k == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $bilyet_k_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($bilyet_k_detail); ?></td>
     </tr>
 
     <tr>
         <td>2</td>
         <td>BILYET S </td>
         <td style="border:1px solid black"><?php echo $bilyet_s == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $bilyet_s_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($bilyet_s_detail); ?></td>
     </tr>
 
     <tr>
         <td>3</td>
         <td>KTP </td>
         <td style="border:1px solid black"><?php echo $ktp == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $ktp_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($ktp_detail); ?></td>
     </tr>
 
     <tr>
         <td>4</td>
         <td>Bukti Setor Bank</td>
         <td style="border:1px solid black"><?php echo $bank_evidence == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $bank_evidence_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($bank_evidence_detail); ?></td>
     </tr>
 
     <tr>
         <td>5</td>
         <td>Kartu Keluarga </td>
         <td style="border:1px solid black"><?php echo $family_card == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $family_card_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($family_card_detail); ?></td>
     </tr>
 
     <tr>
         <td>6</td>
         <td>Kwitansi Pembayaran </td>
         <td style="border:1px solid black"><?php echo $receipt == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $receipt_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($receipt_detail); ?></td>
     </tr>
 
     <tr>
         <td>7</td>
         <td>Passport </td>
         <td style="border:1px solid black"><?php echo $passport == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $passport_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($passport_detail); ?></td>
     </tr>
 
     <tr>
         <td>8</td>
         <td>Surat Kuasa </td>
         <td style="border:1px solid black"><?php echo $power_of_attorney == 3 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo $power_of_attorney_detail; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($power_of_attorney_detail); ?></td>
     </tr>
 
     <tr>
         <td>9</td>
         <td>Surat Pengajuan Tagihan </td>
         <td style="border:1px solid black"><?php echo $letter_bill == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-        <td style="border:1px solid black"><?php echo (!empty($letter_bill_detail)) ? number_format($letter_bill_detail, 2) : '-'; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo (!empty($letter_bill_detail)) ? number_format($letter_bill_detail, 2) : '-'; ?></td>
     </tr>
 
     <tr>
         <td>10</td>
         <td>Dokumen Tambahan </td>
         <td style="border:1px solid black"></td>
-        <td style="border:1px solid black"><?php echo $other_document; ?></td>
+        <td style="border:1px solid black; padding: 4px;"><?php echo nl2br($other_document); ?></td>
     </tr>
 </table>
 

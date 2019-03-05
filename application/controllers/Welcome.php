@@ -37,20 +37,27 @@ class Welcome extends MY_Controller
         $data = array(
             'title'         => 'Dashboard',
             'content'       => 'layouts/dashboard',
+            'getJson'       => site_url($this->_module . '/getDataNasabah'),
+            'checkDetail'   => site_url( $this->_module . '/checkDetail' )
         );
 
         $this->load->view('welcome_message', $data);
     }
 
-    public function loadRigData()
+    public function getDataNasabah( $id = '', $val = '')
     {
-        return master::responseGetData($this->_m_rig);
+        $this->output->set_content_type('application/json', 'utf-8');
+        echo $this->master_model->generateDatatablesDashboard($id, $val);
     }
 
+    public function checkDetail()
+    {
+        $id = $this->input->post('id');
+        return master::getDataById(array('id' => $id), 'm_data');
+    }
 
     public function logout()
     {
-        // print_debug($this->session->userdata());
         if ($this->session->userdata('is_loggedin') === true) {
             $this->session->unset_userdata('is_loggedin');
             $this->session->unset_userdata('id');

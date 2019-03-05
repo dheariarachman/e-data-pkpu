@@ -41,9 +41,9 @@
 			
 				<tr>
 					<td style="border:1px solid black; text-align: center;"><?php echo $num;?></td>
-					<td style="border:1px solid black"><?php echo $arr[$no][0]?></td>
-					<td style="border:1px solid black"><?php echo $arr[$no][1] == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
-					<td style="border:1px solid black"><?php echo $arr[$no][2]?></td>
+					<td style="border:1px solid black; padding: 4px;"><?php echo $arr[$no][0]?></td>
+					<td style="border:1px solid black;"><?php echo $arr[$no][1] == 1 ? '<center><img width="20" src="'.base_url().'assets/img/check.png"></center>' : ''; ?></td>
+					<td style="border:1px solid black; padding: 4px;"><?php echo nl2br($arr[$no][2]); ?></td>
 					
 				</tr>
 		<?php $no++; } ?>

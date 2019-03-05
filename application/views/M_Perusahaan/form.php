@@ -202,35 +202,9 @@
 					<div class="form-group row">
 						<label for="Bilyet_K" class="col-sm-3 col-form-label"></label>
 						<div class="col-sm-9">
-							<!-- <input type="text" class="form-control" id="pengesahan_badan_hukum_detail" name="pengesahan_badan_hukum_detail" placeholder="Detail pengesahan_badan_hukum"> -->
 							<textarea name="pengesahan_badan_hukum_detail" id="pengesahan_badan_hukum_detail" cols="30" rows="3" class="form-control" placeholder="Pengesahan Badan Hukum Detail"></textarea>
 						</div>
                     </div>
-                    
-                    <!-- Start Perjanjian Kredit -->
-
-                    <div class="form-group row">
-						<div class="col-sm-3"><small>Perjanjian Kredit</small></div>
-						<div class="col-sm-9">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="perjanjian_kredit2" name="perjanjian_kredit" class="custom-control-input" value="1">
-								<label class="custom-control-label" for="perjanjian_kredit2">Available</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="perjanjian_kredit3" name="perjanjian_kredit" class="custom-control-input" value="0">
-								<label class="custom-control-label" for="perjanjian_kredit3">Not Available</label>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group row">
-						<label for="Bilyet_K" class="col-sm-3 col-form-label"></label>
-						<div class="col-sm-9">
-							<textarea name="perjanjian_kredit_detail" id="perjanjian_kredit_detail" cols="30" rows="3" class="form-control" placeholder="Detail Perjanjian Kredit"></textarea>
-						</div>
-					</div>
-
-                    <!-- End Perjanjian Kredit -->
 
 					<!-- letter bill -->
 
@@ -303,6 +277,16 @@
 						</div>
 						<div class="col-sm-9">
 							<textarea name="amandement_detail" id="amandement_detail" cols="30" rows="3" class="form-control" placeholder="Detail Perubahan"></textarea>
+						</div>
+					</div>
+
+					<!-- Dokumen Tambahan / other_document -->
+					<div class="form-group row">
+						<div class="col-sm-3">
+							<font size="2">Perjanjian Kredit</font>
+						</div>
+						<div class="col-sm-9">
+							<textarea name="perjanjian_kredit_detail" id="perjanjian_kredit_detail" cols="30" rows="3" class="form-control" placeholder="Perjanjian Kredit"></textarea>
 						</div>
 					</div>
 
