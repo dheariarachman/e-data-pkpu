@@ -246,7 +246,7 @@ class master
 
         $data = array(
             'username'      => $CI->session->userdata('display_name'),
-            'ip_address'    => $_SERVER['HTTP_CLIENT_IP'],
+            'ip_address'    => $CI->input->ip_address(),
             'activity'      => $activity,
             'data'          => $data
         );
