@@ -190,7 +190,7 @@ class master
         $status_deleted     = $CI->master_model->delete($data, $table);
         $response           = self::responseData(!$status_deleted, self::statusDeleted($status_deleted));
 
-        self::_createLogActivity('menghapus data  ' . $table, 'No. Urut => ' . $numbering->numbering);
+        self::_createLogActivity('menghapus data  ' . $table . 'No. Urut : ' . $numbering->numbering, $data['id']);
         return self::setResponse($response, self::statusCode($status_deleted), self::$_json);
     }
 
