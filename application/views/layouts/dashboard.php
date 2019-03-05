@@ -88,32 +88,110 @@
             <div class="modal-body">
                 <h1 align="center"><span class="badge badge-secondary" id="status"></span></h1>
                 <hr class="divider">
-                    <table border="1" style="border-collapse: collapse;" width="100%">
-                        <tr>
-                            <th>No.</th>
-                            <th>Dokumen</th>
-                            <th>Checklist</th>
-                            <th>Keterangan</th>
-                        </tr>
-                        <tr>
-                            <th>Ada</th>
-                            <th>Tidak</th>
-                        </tr>
-                    </table>
-                <form>
+                <div>
+                    <!-- ID Jamaah -->
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">ID Jamaah</label>
                         <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail">
                         </div>
                     </div>
+                    <!-- Nama -->
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail">
                         </div>
                     </div>
-                </form>
+
+                    <!-- Total Tagihan -->
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Total Tagihan</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail">
+                        </div>
+                    </div>
+                </div>
+                <hr class="divider">
+                <table border="1" style="border-collapse: collapse;" width="100%">
+                <thead>
+                    <tr>
+                        <td width="5%" align="center" rowspan="2">No.</td>
+                        <td width="35%" align="center" rowspan="2">Dokumen</td>
+                        <td width="20%" align="center" colspan="2">Checklist</td>
+                        <td width="40" align="center" rowspan="2">Keterangan</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" align="center">Ada</td>
+                        <td width="10%" align="center">Tidak Ada</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Bilyet K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -123,15 +201,17 @@
     function checkDetail(id) {
 
         $.ajax({
-            url: '<?php echo $checkDetail; ?>',
-            dataType: 'json',
-            type: 'POST',
-            data: { id: id }
-        })
-        .done(function(res) {
-            $('#detailModal').modal('toggle');
-            console.log(res);
-        });
+                url: '<?php echo $checkDetail; ?>',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    id: id
+                }
+            })
+            .done(function(res) {
+                $('#detailModal').modal('toggle');
+                console.log(res);
+            });
         $('#status').text('Complete');
     }
 
