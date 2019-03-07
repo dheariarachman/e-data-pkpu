@@ -81,145 +81,76 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h1 align="center"><span class="badge badge-secondary" id="status"></span></h1>
-                <hr class="divider">
-                <div>
-                    <!-- ID Jamaah -->
-                    <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">ID Jamaah</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail">
-                        </div>
-                    </div>
-                    <!-- Nama -->
-                    <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail">
-                        </div>
-                    </div>
-
-                    <!-- Total Tagihan -->
-                    <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Total Tagihan</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail">
-                        </div>
-                    </div>
-                </div>
-                <hr class="divider">
-                <table border="1" style="border-collapse: collapse;" width="100%">
-                <thead>
-                    <tr>
-                        <td width="5%" align="center" rowspan="2">No.</td>
-                        <td width="35%" align="center" rowspan="2">Dokumen</td>
-                        <td width="20%" align="center" colspan="2">Checklist</td>
-                        <td width="40" align="center" rowspan="2">Keterangan</td>
-                    </tr>
-                    <tr>
-                        <td width="10%" align="center">Ada</td>
-                        <td width="10%" align="center">Tidak Ada</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Bilyet K</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<?php $this->load->view('layouts/modal'); ?>
 
 <script type="text/javascript">
     function checkDetail(id) {
 
         $.ajax({
-                url: '<?php echo $checkDetail; ?>',
-                dataType: 'json',
-                type: 'POST',
-                data: {
-                    id: id
-                }
-            })
-            .done(function(res) {
-                $('#detailModal').modal('toggle');
-                console.log(res);
-            });
-        $('#status').text('Complete');
+            url: '<?php echo $checkDetail; ?>',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                id: id
+            }
+        })
+        .done(function(res) {
+            $('#detailModal').modal('toggle');
+            $('#customer').val(res.data[0].customer);
+            $('#id_jamaah').val(res.data[0].id_jamaah);
+            $('#total_tagihan').number(true);
+            $('#total_tagihan').val(res.data[0].amount);
+
+            if(res.data[0].power_of_attorney == 2) {
+                $('#badge-kuasa').text('Tidak Dikuasakan');
+            } else {
+                $('#badge-kuasa').text('Dikuasakan');
+            }
+
+            checkStatus(res.data[0].bilyet_k, '#bilyet_k_t', '#bilyet_k_f');
+            checkStatus(res.data[0].bilyet_s, '#bilyet_s_t', '#bilyet_s_f');
+            checkStatus(res.data[0].ktp, '#ktp_t', '#ktp_f');
+            checkStatus(res.data[0].bank_evidence, '#bank_evidence_t', '#bank_evidence_f');
+            checkStatus(res.data[0].family_card, '#family_card_t', '#family_card_f');
+            checkStatus(res.data[0].receipt, '#receipt_t', '#receipt_f');
+            checkStatus(res.data[0].passport, '#passport_t', '#passport_f');
+            checkStatus((res.data[0].power_of_attorney == 3) ? 1 : res.data[0].power_of_attorney, '#power_of_attorney_t', '#power_of_attorney_f');
+            checkStatus(res.data[0].letter_bill, '#letter_bill_t', '#letter_bill_f');
+
+            if (
+                (
+                    res.data[0].bilyet_k            == 1 ||
+                    res.data[0].bilyet_s            == 1 
+                ) &&
+                res.data[0].ktp                 == 1 &&
+                res.data[0].bank_evidence       == 1 &&
+                res.data[0].family_card         == 1 &&
+                res.data[0].receipt             == 1 &&
+                res.data[0].passport            == 1 &&
+                res.data[0].power_of_attorney   != 1 &&
+                res.data[0].letter_bill         == 1
+
+            ) {
+                $('#status').removeClass('badge-danger');
+                $('#status').addClass('badge-success');
+                $('#status').text('Lengkap');
+            } else {
+                $('#status').removeClass('badge-success');
+                $('#status').addClass('badge-danger');
+                $('#status').text('Tidak Lengkap');
+            }
+        });
+    }
+
+    function checkStatus(result, id_t, id_f) {
+        $(id_t).empty();
+        $(id_f).empty();
+        (result == 1) ? $(id_t).html('<center><i class="fas fa-check"></i></center>') : $(id_f).html('<center><i class="fas fa-check"></i></center>');
     }
 
     $('#textvalue').on('keypress', function(e) {
         if (e.keyCode == 13) {
-
-            // callDatatables($('#col-find').val(), $('#textvalue').val());
-            callDatatables($('#col-find').val(), '12');
+            callDatatables($('#col-find').val(), $('#textvalue').val());
         }
     })
 

@@ -3,8 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Welcome extends MY_Controller
 {
-
-    private $_m_rig     = 'm_rig';
     private $_module    = 'Welcome';
 
     /**
@@ -37,7 +35,7 @@ class Welcome extends MY_Controller
         $data = array(
             'title'         => 'Dashboard',
             'content'       => 'layouts/dashboard',
-            'getJson'       => site_url($this->_module . '/getDataNasabah'),
+            'getJson'       => site_url( $this->_module . '/getDataNasabah' ),
             'checkDetail'   => site_url( $this->_module . '/checkDetail' )
         );
 
