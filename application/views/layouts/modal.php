@@ -8,33 +8,32 @@
                 <div>
                     <!-- ID Jamaah -->
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">ID Jamaah</label>
-                        <div class="col-sm-10">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">ID Jamaah</label>
+                        <div class="col-sm-8">
                             <input type="text" readonly class="form-control-plaintext" id="id_jamaah">
                         </div>
                     </div>
                     <!-- Nama -->
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
-                        <div class="col-sm-10">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Nama</label>
+                        <div class="col-sm-8">
                             <input type="text" readonly class="form-control-plaintext" id="customer">
                         </div>
                     </div>
 
                     <!-- Total Tagihan -->
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Total Tagihan</label>
-                        <div class="col-sm-10">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Total Tagihan</label>
+                        <div class="col-sm-8">
                             <input type="text" readonly class="form-control-plaintext" id="total_tagihan">
                         </div>
                     </div>
 
                     <!-- Status Dikuasakan -->
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Status Dikuasakan</label>
-                        <div class="col-sm-10">
-                            <!-- <input type="text" readonly class="form-control-plaintext" id="status_kuasa"> -->
-                            <div id="status_kuasa"><span class="badge badge-info" id="badge-kuasa"></span></div>
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Status Dikuasakan</label>
+                        <div class="col-sm-8">
+                        <span class="badge badge-info"><b><h6 id="badge-kuasa"></h6></b></span>
                         </div>
                     </div>
                 </div>
