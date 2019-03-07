@@ -53,6 +53,7 @@ class M_Rig extends MY_Controller
             $n_birth_date       = date('Y-m-d', strtotime($birth_date));
             $data               = master::decode_string($this->input->post());
             $data['birth_date'] = $n_birth_date;
+            $data['created_by'] = $this->session->userdata('display_name');
             return master::saveData($data, $this->_table);
         }
     }
@@ -82,6 +83,7 @@ class M_Rig extends MY_Controller
         
         $n_birth_date   = date('Y-m-d', strtotime($array_val['birth_date']));
         $array_val['birth_date'] = $n_birth_date;
+        $array_val['updated_by'] = $this->session->userdata('display_name');
         // print_debug($array_val);
         return master::updateData(master::decode_string($array_val), array('id' => $id), $this->_table);
     }
