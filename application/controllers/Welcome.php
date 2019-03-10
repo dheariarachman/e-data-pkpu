@@ -36,7 +36,8 @@ class Welcome extends MY_Controller
             'title'         => 'Dashboard',
             'content'       => 'layouts/dashboard',
             'getJson'       => site_url( $this->_module . '/getDataNasabah' ),
-            'checkDetail'   => site_url( $this->_module . '/checkDetail' )
+            'checkDetail'   => site_url( $this->_module . '/checkDetail' ),
+            'print_pdf'     => site_url( $this->_module .  '/printToPdf' ),
         );
 
         $this->load->view('welcome_message', $data);
@@ -63,5 +64,21 @@ class Welcome extends MY_Controller
             $this->session->sess_destroy();
             redirect('Login', 'refresh');
         }
+    }
+
+    public function printToPdf()
+    {
+        $queryTable = $this->master_model->getAll('m_data', 'numbering');
+        $data = array(
+            'data' => $queryTable
+        );
+        $tablePdf = $this->load->view('layouts/pdf', $data, true);
+        return master::cetak($tablePdf, 'L');
+    }
+
+    public function printToExcel()
+    {
+        $title = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $print = Excel::createExcel();
     }
 }

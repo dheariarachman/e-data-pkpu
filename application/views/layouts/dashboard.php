@@ -48,11 +48,26 @@
                     <select name="col-find" id="col-find"></select>
                 </div>
                 <div class="form-group mx-sm-3 mb-2">
-                    <label for="inputPassword2" class="sr-only">Password</label>
+                    <label for="inputPassword2" class="sr-only"></label>
                     <input type="text" class="form-control" id="textvalue" placeholder="Keyword" style="width: 350px">
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" style="align-items: center; justify-content: center;">
+        <button class="btn btn-success btn-icon-split" style="margin: 3px;"> 
+            <span class="icon text-white-50">
+                <i class="fas fa-file-excel"></i>
+            </span>
+            <span class="text">Export Excel</span>
+        </button>
+
+        <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php echo $print_pdf; ?>" target="_blank">
+            <span class="icon text-white-50">
+                <i class="fas fa-file-pdf"></i>
+            </span>
+            <span class="text"><font color="white">Export PDF</font></span>
+        </a>
     </div>
 </div>
 
