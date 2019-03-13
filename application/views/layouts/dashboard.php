@@ -43,9 +43,15 @@
             <div class="card shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
+                        <div class="col">                            
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rekap Per <span id="datePerTodayTotal"></span></div>
+                        </div>
+                    </div>
+                    <hr class="divider">
+                    <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nasabah</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang Per <span id="datePerToday"></span></div>
+                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaah"></span> Jamaah</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
                         </div>
                         <div class="col text-right">
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiah"></span></div>
@@ -54,11 +60,20 @@
                     <hr class="divider">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Non Nasabah</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang Per <span id="datePerTodayNon"></span></div>
+                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaahNon"></span> Non Jamaah</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
                         </div>
                         <div class="col text-right">
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiahNon"></span></div>
+                        </div>
+                    </div>
+                    <hr class="divider">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col">                            
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total</div>
+                        </div>
+                        <div class="col text-right">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiahNonTotal"></span></div>
                         </div>
                     </div>
                 </div>
@@ -246,7 +261,7 @@
             type: 'POST'
         })
         .done(function(result) {
-            $('#datePerToday').text(formatDate(new Date(result[0].GROUPING)));
+            $('#jamaah').text(result[0].customer);
             $('#rupiah').text(formatter.format(result[0].total));
         })
 
@@ -256,8 +271,18 @@
             type: 'POST'
         })
         .done(function(result) {
-            $('#datePerTodayNon').text(formatDate(new Date(result[0].GROUPING)));
+            $('#jamaahNon').text(result[0].customer);
             $('#rupiahNon').text(formatter.format(result[0].total));
+        })
+
+        $.ajax({
+            url: '<?php echo $getSumTotal; ?>',
+            dataType: 'json',
+            type: 'POST'
+        })
+        .done(function(result) {
+            $('#datePerTodayTotal').text(formatDate(new Date()));
+            $('#rupiahNonTotal').text(formatter.format(result[0].amount));
         })
     });
     

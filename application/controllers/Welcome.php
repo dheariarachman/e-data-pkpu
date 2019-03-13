@@ -40,11 +40,18 @@ class Welcome extends MY_Controller
             'print_pdf'     => site_url( $this->_module . '/printToPdf' ),
             'print_excel'   => site_url( $this->_module . '/printToExcel' ),
             'getSum'        => site_url( $this->_module . '/getSum' ),
+            'getSumTotal'   => site_url( $this->_module . '/getSumTotal'),
             'getSumPerToday'            => site_url( $this->_module . '/getSumPerToday' ),
             'getSumNonNasabahPerToday'  => site_url( $this->_module . '/getSumNonNasabahPerToday' )
         );
 
         $this->load->view('welcome_message', $data);
+    }
+
+    public function getSumTotal()
+    {
+        $data = $this->master_model->getByQuery('SELECT SUM(amount) AS amount FROM( SELECT SUM(amount) AS amount FROM m_data UNION ALL SELECT SUM(amount) AS amount FROM m_data_perusahaan ) x')->result();
+        echo json_encode($data);
     }
 
     public function getSum()

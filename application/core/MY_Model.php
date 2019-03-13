@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     class MY_Model extends CI_Model {
 
+        public function getByQuery($query)
+        {
+            return $this->db->query($query);
+        }
+
         public function getAll($table, $orderBy = '')
         {
             $this->db->select('*');
