@@ -36,9 +36,31 @@
 </style>
 
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+<div class="align-items-center justify-content-between mb-4">
+    <!-- <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> -->
+    <div class="row">
+        <div class="col-xl-6 col-md-6 mb-4 offset-3">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang Per <span id="datePerToday"></span></div>
+                        </div>
+                        <div class="col text-right">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiah"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row" id="row-sum">
+    <!-- Earnings (Monthly) Card Example -->	
+</div>
+
+<div style="padding: 16px;"></div>
 
 <div class="container">
     <div class="row">
@@ -55,12 +77,12 @@
         </div>
     </div>
     <div class="row" style="align-items: center; justify-content: center;">
-        <button class="btn btn-success btn-icon-split" style="margin: 3px;"> 
+        <a class="btn btn-success btn-icon-split" style="margin: 3px;" href="<?php echo $print_excel; ?>" target="_blank">
             <span class="icon text-white-50">
                 <i class="fas fa-file-excel"></i>
             </span>
-            <span class="text">Export Excel</span>
-        </button>
+            <span class="text"><font color="white">Export Excel</font></span>
+        </a>
 
         <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php echo $print_pdf; ?>" target="_blank">
             <span class="icon text-white-50">
@@ -167,7 +189,7 @@
         if (e.keyCode == 13) {
             callDatatables($('#col-find').val(), $('#textvalue').val());
         }
-    })
+    })    
 
     $(document).ready(function(e) {
         $('#col-find').select2({
@@ -195,7 +217,49 @@
                 },
             ]
         });
+
+        $.ajax({
+            url: '<?php echo $getSum; ?>',
+            dataType: 'json',
+            type: 'POST'
+        })
+        .done(function(result) {
+            $.map(result, function(val, idx) {
+                $('#row-sum').append(cardBluePrint(formatDate(new Date(val.GROUPING)), val.customer, formatter.format(val.total)))
+            })
+        })
+
+        $.ajax({
+            url: '<?php echo $getSumPerToday; ?>',
+            dataType: 'json',
+            type: 'POST'
+        })
+        .done(function(result) {
+            $('#datePerToday').text(formatDate(new Date(result[0].GROUPING)));
+            $('#rupiah').text(formatter.format(result[0].total));
+        })
     });
+    
+
+    function cardBluePrint(date, customer, amount) {
+        let card = `<div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${date}</div>
+                            <div class="text-lg font-weight-bold text-gray-800 mb-1">${customer} Jamaah</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">- ${amount}</div>                            
+                        </div>
+                        <div class="col-auto">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        return card;
+    }
 
     function callDatatables(col, val) {
         $("#mytable").dataTable().fnDestroy()

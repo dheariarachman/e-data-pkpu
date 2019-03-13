@@ -40,6 +40,16 @@
 						<input type="text" class="form-control" id="email" placeholder="Email" name="email" autocomplete="off">
 					</div>
 
+					<!-- Total Tagihan -->
+					<div class="form-group row">
+						<div class="col-sm-3">
+							Total Tagihan
+						</div>
+						<div class="col-sm-9">
+							<input class="form-control" type="text" id="amount" name="amount" placeholder="x.xxx.xxx">
+						</div>
+					</div>
+
 					<!-- Bilyet K -->
 					<div class="form-group row">
 						<div class="col-sm-3">Permohonan Tagihan</div>
@@ -298,7 +308,7 @@
 						<div class="col-sm-9">
 							<textarea name="other_document" id="other_document" cols="30" rows="3" class="form-control" placeholder="Dokumen Tambahan"></textarea>
 						</div>
-					</div>
+					</div>					
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

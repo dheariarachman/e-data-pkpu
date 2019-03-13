@@ -1,3 +1,30 @@
+// Indonesia Date's Format
+function formatDate(date) {
+    var monthNames = [
+        "Januari", "Februari", "Maret",
+        "April", "Mei", "Juni", "Juli",
+        "Agustus", "September", "Oktober",
+        "November", "Desember"
+    ];
+
+    var daysName = [
+        "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"
+    ];
+
+    var days        = date.getDay();
+    var day         = date.getDate();
+    var monthIndex  = date.getMonth();
+    var year        = date.getFullYear();
+
+    return daysName[days] + ', ' + day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+
+// Rupiah Currency
+let formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+});
+
 // Numeric only control handler
 jQuery.fn.ForceNumericOnly =
 function()

@@ -21,6 +21,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return $query;
 		}
 
+		public function getSum($table = '')
+		{
+			$this->db->select('COUNT(customer) customer,  SUM(amount) total, DATE(created_on) GROUPING');
+			$this->db->from($table);
+			$this->db->group_by('GROUPING');
+			return $this->db->get();
+		}
+
+		public function getSumPerToday($table = '')
+		{
+			$this->db->select('COUNT(customer) customer,  SUM(amount) total, DATE(MAX(created_on)) GROUPING');
+			$this->db->from($table);
+			return $this->db->get();
+		}
+
 		public function generateDatatables()
 		{
 			$this->datatables->select('numbering, id_jamaah, customer, c_address, phone_number, power_of_attorney_detail, amount, id');

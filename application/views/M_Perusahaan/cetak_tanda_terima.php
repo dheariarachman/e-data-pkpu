@@ -33,6 +33,11 @@
 		<td width="5%">:</td>
 		<td><?php echo $result->phone_number; ?></td>
 	</tr>
+	<tr>
+		<td width="25%" style="padding: 4px;">Total Tagihan</td>
+		<td width="5%">:</td>
+		<td>Rp. <?php echo number_format($result->amount); ?></td>
+	</tr>
 </table>
 
 <div style="margin: 8px;"></div>

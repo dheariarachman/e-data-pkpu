@@ -15,11 +15,11 @@
 <table align="center" border="1" style="border-collapse: collapse;" width="100%">
     <tr>
         <th width="5%">No. Urut</th>
-        <th width="15%">ID Jamaah</th>
+        <th width="11%">ID Jamaah</th>
         <th width="20%">Nama</th>
-        <th width="25%">Alamat</th>
+        <th width="22%">Alamat</th>
         <th width="20%">Kuasa</th>
-        <th width="15%" colspan="2">Total Tagihan</th>
+        <th width="22%" colspan="2">Total Tagihan</th>
     </tr>
     <?php $no = 1; $sumAmount = 0;?>
     <?php foreach ( $data->result() as $key => $value ): ?>

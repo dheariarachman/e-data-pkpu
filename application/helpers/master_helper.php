@@ -29,6 +29,10 @@ class master
         'Sat'   => 'Sabtu',
     );
 
+    private static $_alphabet = array(
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+    );
+
     private static function status($data)
     {
         if (!empty($data)) {
@@ -257,5 +261,5 @@ class master
     public static function cetak($html = '', $orientation = '')
     {
         mpdf::print_pdf($html, $orientation);
-    }
+    }    
 }

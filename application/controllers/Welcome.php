@@ -37,10 +37,25 @@ class Welcome extends MY_Controller
             'content'       => 'layouts/dashboard',
             'getJson'       => site_url( $this->_module . '/getDataNasabah' ),
             'checkDetail'   => site_url( $this->_module . '/checkDetail' ),
-            'print_pdf'     => site_url( $this->_module .  '/printToPdf' ),
+            'print_pdf'     => site_url( $this->_module . '/printToPdf' ),
+            'print_excel'   => site_url( $this->_module . '/printToExcel' ),
+            'getSum'        => site_url( $this->_module . '/getSum' ),
+            'getSumPerToday'        => site_url( $this->_module . '/getSumPerToday' )
         );
 
         $this->load->view('welcome_message', $data);
+    }
+
+    public function getSum()
+    {
+        $data = $this->master_model->getSum('m_data')->result();
+        echo json_encode($data);
+    }
+
+    public function getSumPerToday()
+    {
+        $data = $this->master_model->getSumPerToday('m_data')->result();
+        echo json_encode($data);
     }
 
     public function getDataNasabah( $id = '', $val = '')
@@ -78,7 +93,24 @@ class Welcome extends MY_Controller
 
     public function printToExcel()
     {
-        $title = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
-        $print = Excel::createExcel();
+        $dataQuery = array();
+        $title      = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $query      = $this->master_model->getAll('m_data', 'numbering')->result();
+        foreach ($query as $key => $value) {
+            $dataQuery[$key] = array(
+                'A' => $value->numbering,
+                'B' => $value->id_jamaah,
+                'C' => $value->customer,
+                'D' => $value->c_address,
+                'E' => $value->power_of_attorney_detail,
+                'F' => $value->amount,
+            );
+        }
+
+        // $dataTitle = master::setExcelTitle(array('No. Urut', 'ID. Jamaah', 'Nama', 'Alamat', 'Kuasa', 'Total Tagiah'));
+        // $dataValue = Excel::setExcelValue()
+        $dataTitle = Excel::setExcelTitle(array('No. Urut', 'ID. Jamaah', 'Nama', 'Alamat', 'Kuasa', 'Total Tagiah'));
+        // print_debug($dataTitle);
+        return Excel::exportExcel($title, $dataTitle, $dataQuery);
     }
 }
