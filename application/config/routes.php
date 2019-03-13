@@ -54,4 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
 
 $route['master-rig/index']              = 'M_Rig/index';
-$route['master-perusahaan/index']        = 'M_Perusahaan/index';
+$route['master-perusahaan/index']       = 'M_Perusahaan/index';

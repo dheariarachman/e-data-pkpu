@@ -43,33 +43,37 @@
             <div class="card shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col">                            
+                        <div class="col">
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rekap Per <span id="datePerTodayTotal"></span></div>
                         </div>
                     </div>
                     <hr class="divider">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col">
-                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaah"></span> Jamaah</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
+                    <a href="<?php echo base_url('master-rig/index'); ?>" target="_blank" style="text-decoration: none;">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaah"></span> Jamaah</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
+                            </div>
+                            <div class="col text-right">
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiah"></span></div>
+                            </div>
                         </div>
-                        <div class="col text-right">
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiah"></span></div>
+                    </a>
+                    <hr class="divider">
+                    <a href="<?php echo base_url('master-perusahaan/index'); ?>" target="_blank" style="text-decoration: none;">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaahNon"></span> Non Jamaah</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
+                            </div>
+                            <div class="col text-right">
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiahNon"></span></div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <hr class="divider">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaahNon"></span> Non Jamaah</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
-                        </div>
-                        <div class="col text-right">
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiahNon"></span></div>
-                        </div>
-                    </div>
-                    <hr class="divider">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col">                            
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Total</div>
                         </div>
                         <div class="col text-right">
@@ -83,7 +87,7 @@
 </div>
 
 <div class="row" id="row-sum">
-    <!-- Earnings (Monthly) Card Example -->	
+    <!-- Earnings (Monthly) Card Example -->
 </div>
 
 <div style="padding: 16px;"></div>
@@ -107,14 +111,18 @@
             <span class="icon text-white-50">
                 <i class="fas fa-file-excel"></i>
             </span>
-            <span class="text"><font color="white">Export Excel</font></span>
+            <span class="text">
+                <font color="white">Export Excel</font>
+            </span>
         </a>
 
         <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php echo $print_pdf; ?>" target="_blank">
             <span class="icon text-white-50">
                 <i class="fas fa-file-pdf"></i>
             </span>
-            <span class="text"><font color="white">Export PDF</font></span>
+            <span class="text">
+                <font color="white">Export PDF</font>
+            </span>
         </a>
     </div>
 </div>
@@ -150,72 +158,72 @@
     function checkDetail(id) {
 
         $.ajax({
-            url: '<?php echo $checkDetail; ?>',
-            dataType: 'json',
-            type: 'POST',
-            data: {
-                id: id
-            }
-        })
-        .done(function(res) {
-            $('#detailModal').modal('toggle');
-            $('#customer').val(res.data[0].customer);
-            $('#id_jamaah').val(res.data[0].id_jamaah);
-            $('#total_tagihan').number(true);
-            $('#total_tagihan').val(res.data[0].amount);
+                url: '<?php echo $checkDetail; ?>',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    id: id
+                }
+            })
+            .done(function(res) {
+                $('#detailModal').modal('toggle');
+                $('#customer').val(res.data[0].customer);
+                $('#id_jamaah').val(res.data[0].id_jamaah);
+                $('#total_tagihan').number(true);
+                $('#total_tagihan').val(res.data[0].amount);
 
-            if(res.data[0].power_of_attorney == 2) {
-                $('#badge-kuasa').text('Tidak Dikuasakan');
-            } else {
-                $('#badge-kuasa').text('Dikuasakan');
-            }
+                if (res.data[0].power_of_attorney == 2) {
+                    $('#badge-kuasa').text('Tidak Dikuasakan');
+                } else {
+                    $('#badge-kuasa').text('Dikuasakan');
+                }
 
-            checkStatus(res.data[0].bilyet_k, '#bilyet_k_t', '#bilyet_k_f');
-            checkStatus(res.data[0].bilyet_s, '#bilyet_s_t', '#bilyet_s_f');
-            checkStatus(res.data[0].ktp, '#ktp_t', '#ktp_f');
-            checkStatus(res.data[0].bank_evidence, '#bank_evidence_t', '#bank_evidence_f');
-            checkStatus(res.data[0].family_card, '#family_card_t', '#family_card_f');
-            checkStatus(res.data[0].receipt, '#receipt_t', '#receipt_f');
-            checkStatus(res.data[0].passport, '#passport_t', '#passport_f');
-            checkStatus((res.data[0].power_of_attorney == 3) ? 1 : res.data[0].power_of_attorney, '#power_of_attorney_t', '#power_of_attorney_f');
-            checkStatus(res.data[0].letter_bill, '#letter_bill_t', '#letter_bill_f');
+                checkStatus(res.data[0].bilyet_k, '#bilyet_k_t', '#bilyet_k_f');
+                checkStatus(res.data[0].bilyet_s, '#bilyet_s_t', '#bilyet_s_f');
+                checkStatus(res.data[0].ktp, '#ktp_t', '#ktp_f');
+                checkStatus(res.data[0].bank_evidence, '#bank_evidence_t', '#bank_evidence_f');
+                checkStatus(res.data[0].family_card, '#family_card_t', '#family_card_f');
+                checkStatus(res.data[0].receipt, '#receipt_t', '#receipt_f');
+                checkStatus(res.data[0].passport, '#passport_t', '#passport_f');
+                checkStatus((res.data[0].power_of_attorney == 3) ? 1 : res.data[0].power_of_attorney, '#power_of_attorney_t', '#power_of_attorney_f');
+                checkStatus(res.data[0].letter_bill, '#letter_bill_t', '#letter_bill_f');
 
-            if (
-                (
-                    res.data[0].bilyet_k            == 1 ||
-                    res.data[0].bilyet_s            == 1 
-                ) &&
-                res.data[0].ktp                 == 1 &&
-                res.data[0].bank_evidence       == 1 &&
-                res.data[0].family_card         == 1 &&
-                res.data[0].receipt             == 1 &&
-                res.data[0].passport            == 1 &&
-                res.data[0].power_of_attorney   != 1 &&
-                res.data[0].letter_bill         == 1
+                if (
+                    (
+                        res.data[0].bilyet_k == 1 ||
+                        res.data[0].bilyet_s == 1
+                    ) &&
+                    res.data[0].ktp == 1 &&
+                    res.data[0].bank_evidence == 1 &&
+                    res.data[0].family_card == 1 &&
+                    res.data[0].receipt == 1 &&
+                    res.data[0].passport == 1 &&
+                    res.data[0].power_of_attorney != 1 &&
+                    res.data[0].letter_bill == 1
 
-            ) {
-                $('#status').removeClass('badge-danger');
-                $('#status').addClass('badge-success');
-                $('#status').text('Lengkap');
-            } else {
-                $('#status').removeClass('badge-success');
-                $('#status').addClass('badge-danger');
-                $('#status').text('Tidak Lengkap');
-            }
-        });
+                ) {
+                    $('#status').removeClass('badge-danger');
+                    $('#status').addClass('badge-success');
+                    $('#status').text('Lengkap');
+                } else {
+                    $('#status').removeClass('badge-success');
+                    $('#status').addClass('badge-danger');
+                    $('#status').text('Tidak Lengkap');
+                }
+            });
     }
 
     function checkStatus(result, id_t, id_f) {
         $(id_t).empty();
         $(id_f).empty();
-        (result == 1) ? $(id_t).html('<center><i class="fas fa-check"></i></center>') : $(id_f).html('<center><i class="fas fa-check"></i></center>');
+        (result == 1) ? $(id_t).html('<center><i class="fas fa-check"></i></center>'): $(id_f).html('<center><i class="fas fa-check"></i></center>');
     }
 
     $('#textvalue').on('keypress', function(e) {
         if (e.keyCode == 13) {
             callDatatables($('#col-find').val(), $('#textvalue').val());
         }
-    })    
+    })
 
     $(document).ready(function(e) {
         $('#col-find').select2({
@@ -245,47 +253,47 @@
         });
 
         $.ajax({
-            url: '<?php echo $getSum; ?>',
-            dataType: 'json',
-            type: 'POST'
-        })
-        .done(function(result) {
-            $.map(result, function(val, idx) {
-                $('#row-sum').append(cardBluePrint(formatDate(new Date(val.GROUPING)), val.customer, formatter.format(val.total)))
+                url: '<?php echo $getSum; ?>',
+                dataType: 'json',
+                type: 'POST'
             })
-        })
+            .done(function(result) {
+                $.map(result, function(val, idx) {
+                    $('#row-sum').append(cardBluePrint(formatDate(new Date(val.GROUPING)), val.customer, formatter.format(val.total)))
+                })
+            })
 
         $.ajax({
-            url: '<?php echo $getSumPerToday; ?>',
-            dataType: 'json',
-            type: 'POST'
-        })
-        .done(function(result) {
-            $('#jamaah').text(result[0].customer);
-            $('#rupiah').text(formatter.format(result[0].total));
-        })
+                url: '<?php echo $getSumPerToday; ?>',
+                dataType: 'json',
+                type: 'POST'
+            })
+            .done(function(result) {
+                $('#jamaah').text(result[0].customer);
+                $('#rupiah').text(formatter.format(result[0].total));
+            })
 
         $.ajax({
-            url: '<?php echo $getSumNonNasabahPerToday; ?>',
-            dataType: 'json',
-            type: 'POST'
-        })
-        .done(function(result) {
-            $('#jamaahNon').text(result[0].customer);
-            $('#rupiahNon').text(formatter.format(result[0].total));
-        })
+                url: '<?php echo $getSumNonNasabahPerToday; ?>',
+                dataType: 'json',
+                type: 'POST'
+            })
+            .done(function(result) {
+                $('#jamaahNon').text(result[0].customer);
+                $('#rupiahNon').text(formatter.format(result[0].total));
+            })
 
         $.ajax({
-            url: '<?php echo $getSumTotal; ?>',
-            dataType: 'json',
-            type: 'POST'
-        })
-        .done(function(result) {
-            $('#datePerTodayTotal').text(formatDate(new Date()));
-            $('#rupiahNonTotal').text(formatter.format(result[0].amount));
-        })
+                url: '<?php echo $getSumTotal; ?>',
+                dataType: 'json',
+                type: 'POST'
+            })
+            .done(function(result) {
+                $('#datePerTodayTotal').text(formatDate(new Date()));
+                $('#rupiahNonTotal').text(formatter.format(result[0].amount));
+            })
     });
-    
+
 
     function cardBluePrint(date, customer, amount) {
         let card = `<div class="col-xl-3 col-md-6 mb-4">
@@ -379,4 +387,4 @@
             }
         });
     }
-</script> 
+</script>
