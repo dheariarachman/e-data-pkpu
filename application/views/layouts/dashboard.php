@@ -44,10 +44,21 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nasabah</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang Per <span id="datePerToday"></span></div>
                         </div>
                         <div class="col text-right">
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiah"></span></div>
+                        </div>
+                    </div>
+                    <hr class="divider">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Non Nasabah</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang Per <span id="datePerTodayNon"></span></div>
+                        </div>
+                        <div class="col text-right">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiahNon"></span></div>
                         </div>
                     </div>
                 </div>
@@ -237,6 +248,16 @@
         .done(function(result) {
             $('#datePerToday').text(formatDate(new Date(result[0].GROUPING)));
             $('#rupiah').text(formatter.format(result[0].total));
+        })
+
+        $.ajax({
+            url: '<?php echo $getSumNonNasabahPerToday; ?>',
+            dataType: 'json',
+            type: 'POST'
+        })
+        .done(function(result) {
+            $('#datePerTodayNon').text(formatDate(new Date(result[0].GROUPING)));
+            $('#rupiahNon').text(formatter.format(result[0].total));
         })
     });
     

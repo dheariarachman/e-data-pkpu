@@ -40,7 +40,7 @@ class M_Perusahaan extends MY_Controller
     public function getDataNasabah()
     {
         $this->output->set_content_type('application/json', 'utf-8');
-        echo $this->master_model->generateDatatablesPerusahaan  ();
+        echo $this->master_model->generateDatatablesPerusahaan();
     }
 
     public function saveData()
@@ -48,7 +48,10 @@ class M_Perusahaan extends MY_Controller
         $this->form_validation->set_rules('name', 'Nama', 'trim|required');
         
         if ($this->form_validation->run() == true) {
-            $data = master::decode_string($this->input->post());
+            $post               = $this->input->post();
+            $post['created_by'] = $this->session->userdata('display_name');
+            
+            $data = master::decode_string($post);
             return master::saveData($data, $this->_table);
         }
     }
@@ -75,7 +78,8 @@ class M_Perusahaan extends MY_Controller
         foreach ($data_arr as $key => $value) {
             $data_arr_d   = explode("=", $value);            
             $array_val[$data_arr_d[0]] = $data_arr_d[1];
-        }        
+        }
+        $array_val['created_by'] = $this->session->userdata('display_name');
         return master::updateData(master::decode_string($array_val), array('id' => $id), $this->_table);
     }
 

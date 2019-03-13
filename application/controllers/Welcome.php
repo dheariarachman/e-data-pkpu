@@ -40,7 +40,8 @@ class Welcome extends MY_Controller
             'print_pdf'     => site_url( $this->_module . '/printToPdf' ),
             'print_excel'   => site_url( $this->_module . '/printToExcel' ),
             'getSum'        => site_url( $this->_module . '/getSum' ),
-            'getSumPerToday'        => site_url( $this->_module . '/getSumPerToday' )
+            'getSumPerToday'            => site_url( $this->_module . '/getSumPerToday' ),
+            'getSumNonNasabahPerToday'  => site_url( $this->_module . '/getSumNonNasabahPerToday' )
         );
 
         $this->load->view('welcome_message', $data);
@@ -48,13 +49,19 @@ class Welcome extends MY_Controller
 
     public function getSum()
     {
-        $data = $this->master_model->getSum('m_data')->result();
+        $data = $this->master_model->getSum('m_data', 'GROUPING', 'COUNT(customer) customer,  SUM(amount) total, DATE(created_on) GROUPING')->result();
         echo json_encode($data);
     }
 
     public function getSumPerToday()
     {
-        $data = $this->master_model->getSumPerToday('m_data')->result();
+        $data = $this->master_model->getSum('m_data', '', 'COUNT(customer) customer,  SUM(amount) total, DATE(MAX(created_on)) GROUPING')->result();
+        echo json_encode($data);
+    }
+
+    public function getSumNonNasabahPerToday()
+    {
+        $data = $this->master_model->getSum('m_data_perusahaan', '', 'COUNT(name) customer,  SUM(amount) total, DATE(MAX(created_on)) GROUPING')->result();
         echo json_encode($data);
     }
 

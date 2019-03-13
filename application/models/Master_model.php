@@ -21,18 +21,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return $query;
 		}
 
-		public function getSum($table = '')
+		public function getSum($table = '', $group_by = '', $select = '')
 		{
-			$this->db->select('COUNT(customer) customer,  SUM(amount) total, DATE(created_on) GROUPING');
+			$this->db->select($select);
 			$this->db->from($table);
-			$this->db->group_by('GROUPING');
-			return $this->db->get();
-		}
-
-		public function getSumPerToday($table = '')
-		{
-			$this->db->select('COUNT(customer) customer,  SUM(amount) total, DATE(MAX(created_on)) GROUPING');
-			$this->db->from($table);
+			if($group_by) {
+				$this->db->group_by($group_by);
+			}			
 			return $this->db->get();
 		}
 
@@ -55,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		public function generateDatatablesPerusahaan()
 		{
-			$this->datatables->select('id, numbering, name, instansi, job_title, address, phone_number, email');
+			$this->datatables->select('id, numbering, name, instansi, job_title, address, phone_number, email, amount');
 			$this->datatables->from('m_data_perusahaan');
 			return $this->datatables->generate();
 		}

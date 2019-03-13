@@ -17,11 +17,11 @@
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="name" placeholder="Nama" name="name" autocomplete="off">
+						<input type="text" class="form-control" id="name" placeholder="PIC" name="name" autocomplete="off">
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" id="instansi" aria-describedby="id_help" name="instansi" autocomplete="off" placeholder="Instansi">
+						<input type="text" class="form-control" id="instansi" aria-describedby="id_help" name="instansi" autocomplete="off" placeholder="Nama / Perusahaan">
                     </div>
 
                     <div class="form-group">

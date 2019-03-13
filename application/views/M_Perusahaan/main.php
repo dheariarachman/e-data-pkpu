@@ -35,11 +35,12 @@
                     <tr>
                         <th width="2%">No</th>
                         <th width="15%">Nama</th>
-                        <th width="15%">Instansi</th>
+                        <th width="15%">PIC</th>                        
                         <th width="10%">Jabatan</th>
-                        <th width="25%">Alamat</th>
+                        <th width="15%">Alamat</th>
                         <th width="10%">No. Handphone</th>
                         <th width="10%">Email</th>
+                        <th width="10%">Tagihan</th>
                         <th width="8%">Aksi</th>
                     </tr>
                 </thead>
@@ -114,12 +115,13 @@
             },            
             columns: [
                 {"data": "numbering"},
-                {"data": "name"},
                 {"data": "instansi"},
+                {"data": "name"},
                 {"data": "job_title"},
                 {"data": "address"},
                 {"data": "phone_number"},
                 {"data": "email"},
+                {"data": "amount", render: $.fn.dataTable.render.number(',', '.', '')},
                 {
                     "data": "id",
                     render: function (data, type, row) {
