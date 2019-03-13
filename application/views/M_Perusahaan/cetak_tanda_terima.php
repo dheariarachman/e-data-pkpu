@@ -9,12 +9,12 @@
 		<td colspan="3" style="padding: 4px;">Telah diterima dari : </td>
 	</tr>
 	<tr>
-		<td width="25%" style="padding: 4px;">Nama</td>
+		<td width="25%" style="padding: 4px;">PIC</td>
 		<td width="5%">:</td>
 		<td><?php echo $result->name; ?></td>
 	</tr>
 	<tr>
-		<td width="25%" style="padding: 4px;">Instansi</td>
+		<td width="25%" style="padding: 4px;">Nama / Perusahaan</td>
 		<td width="5%">:</td>
 		<td><?php echo $result->instansi; ?></td>
 	</tr>
