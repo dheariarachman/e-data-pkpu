@@ -36,6 +36,47 @@
 </style>
 
 <?php if( $id == 1 ): ?>
+<div style="padding: 16px;"></div>
+<h1 class="text-center">Pencarian Data Jamaah</h1>
+<div style="padding: 16px;"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-3">
+            <div class="form-inline">
+                <div class="form-group mb-2">
+                    <select name="col-find" id="col-find"></select>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="inputPassword2" class="sr-only"></label>
+                    <input type="text" class="form-control" id="textvalue" placeholder="Keyword" style="width: 350px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th width="5%">No. Urut</th>
+                        <th width="10%">ID Jamaah</th>
+                        <th width="20%">Nama</th>
+                        <th width="25%">Alamat</th>
+                        <th width="10%">No. Handphone</th>
+                        <th width="15%">Kuasa</th>
+                        <th width="10%">Total Tagihan</th>
+                        <th width="5%">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?php else: ?>
     <!-- Page Heading -->
 <div class="align-items-center justify-content-between">
     <!-- <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> -->
@@ -129,47 +170,6 @@
 
 <div class="row" id="row-sum">
     <!-- Earnings (Monthly) Card Example -->
-</div>
-<?php else: ?>
-<div style="padding: 16px;"></div>
-<h1 class="text-center">Pencarian Data Jamaah</h1>
-<div style="padding: 16px;"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 offset-lg-3">
-            <div class="form-inline">
-                <div class="form-group mb-2">
-                    <select name="col-find" id="col-find"></select>
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <label for="inputPassword2" class="sr-only"></label>
-                    <input type="text" class="form-control" id="textvalue" placeholder="Keyword" style="width: 350px">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card shadow mb-4">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th width="5%">No. Urut</th>
-                        <th width="10%">ID Jamaah</th>
-                        <th width="20%">Nama</th>
-                        <th width="25%">Alamat</th>
-                        <th width="10%">No. Handphone</th>
-                        <th width="15%">Kuasa</th>
-                        <th width="10%">Total Tagihan</th>
-                        <th width="5%">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 <?php endif; ?>
 

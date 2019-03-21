@@ -14,13 +14,13 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-  <a class="nav-link" href="<?php echo base_url('Welcome/index/1'); ?>">
+  <a class="nav-link" href="<?php echo base_url('Welcome/index/2'); ?>">
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Dashboard</span></a>
 </li>
 
 <li class="nav-item active">
-  <a class="nav-link" href="<?php echo base_url('Welcome/index/2'); ?>">
+  <a class="nav-link" href="<?php echo base_url('Welcome/index/1'); ?>">
   <i class="fas fa-search"></i>
     <span>Pencarian Data Jamaah</span></a>
 </li>
