@@ -8,9 +8,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             return $this->db->query($query);
         }
 
-        public function getAll($table, $orderBy = '')
+        public function getAll($table, $orderBy = '', $select = '*')
         {
-            $this->db->select('*');
+            $this->db->select($select);
             $this->db->from($table);
             if($orderBy) {
                 $this->db->order_by($orderBy, 'asc');

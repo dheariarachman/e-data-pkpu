@@ -30,9 +30,10 @@ class Welcome extends MY_Controller
         }
     }
 
-    public function index()
+    public function index($id = '')
     {
         $data = array(
+            'id'            => $id,
             'title'         => 'Dashboard',
             'content'       => 'layouts/dashboard',
             'getJson'       => site_url( $this->_module . '/getDataNasabah' ),
@@ -107,9 +108,9 @@ class Welcome extends MY_Controller
 
     public function printToExcel()
     {
-        $dataQuery = array();
+        $dataQuery  = array();
         $title      = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
-        $query      = $this->master_model->getAll('m_data', 'numbering')->result();
+        $query      = $this->master_model->getAll('m_data', 'numbering', 'numbering, id_jamaah, customer, c_address, power_of_attorney_detail,amount')->result();
         foreach ($query as $key => $value) {
             $dataQuery[$key] = array(
                 'A' => $value->numbering,
@@ -119,12 +120,10 @@ class Welcome extends MY_Controller
                 'E' => $value->power_of_attorney_detail,
                 'F' => $value->amount,
             );
-        }
-
-        // $dataTitle = master::setExcelTitle(array('No. Urut', 'ID. Jamaah', 'Nama', 'Alamat', 'Kuasa', 'Total Tagiah'));
-        // $dataValue = Excel::setExcelValue()
-        $dataTitle = Excel::setExcelTitle(array('No. Urut', 'ID. Jamaah', 'Nama', 'Alamat', 'Kuasa', 'Total Tagiah'));
-        // print_debug($dataTitle);
-        return Excel::exportExcel($title, $dataTitle, $dataQuery);
+        }        
+        
+        $dataTitle      = Excel::setExcelTitle(array(['No. Urut', 8], ['ID. Jamaah', 15], ['Nama', 18], ['Alamat', 20], ['Kuasa', 18], ['Total Tagihan', 20]));
+        $excelValue     = Excel::setExcelValue($dataQuery, 'horizontal_center|vertical_center', true);
+        return Excel::exportExcel($title, $dataTitle, $excelValue);
     }
 }

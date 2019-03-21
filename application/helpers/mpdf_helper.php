@@ -7,7 +7,7 @@ class mpdf
         $mpdf = new \Mpdf\Mpdf(array('orientation' => $orientation, 'format' => 'A4'));
         $mpdf->writeHTMLHeaders('E-Data - v1');        
         $mpdf->WriteHTML($html);
-        $mpdf->allow_charset_conversion=true;
+        $mpdf->allow_charset_conversion = true;
         $mpdf->charset_in='UTF-8';
         $mpdf->Output();
     }

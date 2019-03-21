@@ -35,8 +35,9 @@
     }
 </style>
 
-<!-- Page Heading -->
-<div class="align-items-center justify-content-between mb-4">
+<?php if( $id == 1 ): ?>
+    <!-- Page Heading -->
+<div class="align-items-center justify-content-between">
     <!-- <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> -->
     <div class="row">
         <div class="col-xl-6 col-md-6 mb-4 offset-3">
@@ -53,6 +54,25 @@
                             <div class="col">
                                 <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaah"></span> Jamaah</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <a class="btn btn-success btn-icon-split" style="margin: 3px;" href="<?php echo $print_excel; ?>" target="_blank">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-file-excel"></i>
+                                        </span>
+                                        <span class="text">
+                                            <font color="white">Export Excel</font>
+                                        </span>
+                                    </a>
+
+                                    <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php echo $print_pdf; ?>" target="_blank">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span class="text">
+                                            <font color="white">Export PDF</font>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                             <div class="col text-right">
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiah"></span></div>
@@ -65,6 +85,27 @@
                             <div class="col">
                                 <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaahNon"></span> Non Jamaah</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <!-- <a class="btn btn-success btn-icon-split" style="margin: 3px;" href="<?php // echo $print_excel; ?>" target="_blank"> -->
+                                    <a class="btn btn-success btn-icon-split" style="margin: 3px;" onclick="fnDalamPerbaikan()">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-file-excel"></i>
+                                        </span>
+                                        <span class="text">
+                                            <font color="white">Export Excel</font>
+                                        </span>
+                                    </a>
+
+                                    <!-- <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php // echo $print_pdf; ?>" target="_blank"> -->
+                                    <a class="btn btn-danger btn-icon-split" style="margin: 3px;" onclick="fnDalamPerbaikan()">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span class="text">
+                                            <font color="white">Export PDF</font>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                             <div class="col text-right">
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="rupiahNon"></span></div>
@@ -89,9 +130,10 @@
 <div class="row" id="row-sum">
     <!-- Earnings (Monthly) Card Example -->
 </div>
-
+<?php else: ?>
 <div style="padding: 16px;"></div>
-
+<h1 class="text-center">Pencarian Data Jamaah</h1>
+<div style="padding: 16px;"></div>
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-lg-3">
@@ -106,29 +148,7 @@
             </div>
         </div>
     </div>
-    <div class="row" style="align-items: center; justify-content: center;">
-        <a class="btn btn-success btn-icon-split" style="margin: 3px;" href="<?php echo $print_excel; ?>" target="_blank">
-            <span class="icon text-white-50">
-                <i class="fas fa-file-excel"></i>
-            </span>
-            <span class="text">
-                <font color="white">Export Excel</font>
-            </span>
-        </a>
-
-        <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php echo $print_pdf; ?>" target="_blank">
-            <span class="icon text-white-50">
-                <i class="fas fa-file-pdf"></i>
-            </span>
-            <span class="text">
-                <font color="white">Export PDF</font>
-            </span>
-        </a>
-    </div>
 </div>
-
-<hr class="divider">
-
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -151,10 +171,26 @@
         </div>
     </div>
 </div>
+<?php endif; ?>
+
+<!-- <hr class="divider"> -->
 
 <?php $this->load->view('layouts/modal'); ?>
 
 <script type="text/javascript">
+
+    function fnDalamPerbaikan() {
+        $.confirm({
+            title: 'Oops!',
+            content: 'Fitur masih dalam perbaikan !!',
+            buttons: {
+                confirm: function () {
+                    
+                }
+            }
+        });
+    }
+
     function checkDetail(id) {
 
         $.ajax({
