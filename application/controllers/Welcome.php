@@ -105,7 +105,7 @@ class Welcome extends MY_Controller
             'data' => $queryTable
         );
         $tablePdf = $this->load->view('layouts/pdf', $data, true);
-        $title      = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $title      = 'Daftar Jamaah PT. Solusi Balad Lumampah ( Dalam PKPU )';
         return master::cetak($tablePdf, 'L', $title);
     }
 
@@ -116,14 +116,14 @@ class Welcome extends MY_Controller
             'data' => $queryTable
         );
         $tablePdf = $this->load->view('layouts/pdf_perusahaan', $data, true);
-        $title      = 'Daftar Non Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $title      = 'Daftar Non Jamaah PT. Solusi Balad Lumampah ( Dalam PKPU )';
         return master::cetak($tablePdf, 'L', $title);
     }
 
     public function printToExcelNon()
     {
         $dataQuery  = array();
-        $title      = 'Daftar Non Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $title      = 'Daftar Non Jamaah PT. Solusi Balad Lumampah ( Dalam PKPU )';
         $query      = $this->master_model->getAll('m_data_perusahaan', 'numbering', 'numbering, instansi, name, address, power_of_attorney_detail, amount')->result();
         foreach ($query as $key => $value) {
             $dataQuery[$key] = array(
@@ -144,7 +144,7 @@ class Welcome extends MY_Controller
     public function printToExcel()
     {
         $dataQuery  = array();
-        $title      = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $title      = 'Daftar Jamaah PT. Solusi Balad Lumampah ( Dalam PKPU )';
         $query      = $this->master_model->getAll('m_data', 'numbering', 'numbering, id_jamaah, customer, c_address, power_of_attorney_detail,amount')->result();
         foreach ($query as $key => $value) {
             $dataQuery[$key] = array(

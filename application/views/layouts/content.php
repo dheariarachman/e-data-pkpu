@@ -93,4 +93,20 @@
             }
         });
     }   
+
+    function about() {
+        let link = 'https://mail.google.com/mail/?view=cm&fs=1&to=dheariarachman@gmail.com&su=Error System E-Data 2 ASP Law Firm&body=BODY&';
+        $.confirm({
+            title: 'Information!',
+            content: '<center><b>Aplikasi E-Data V<sup>2</sup></b></center>\n<center>ASP Law Firm</center>\n\n\nJika Anda Menemukan Kesalahan pada Program, Hubungi Administrator Program di email berikut => \n <center><a href="'+link+'" target="_blank" >Kirim Pesan</a></center>',
+            buttons: {
+                OK: function () {
+                    //window.location.href = '<?php // echo base_url('Welcome/logout'); ?>';
+                },
+                cancel: function () {
+                    $.alert('Canceled!');
+                },
+            }
+        });
+    }
 </script>
