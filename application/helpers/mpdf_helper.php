@@ -11,6 +11,6 @@ class mpdf
         $mpdf->WriteHTML($html);
         $mpdf->allow_charset_conversion = true;
         $mpdf->charset_in='UTF-8';
-        $mpdf->Output();
+        $mpdf->Output('Daftar_Nasabah');
     }
 }
