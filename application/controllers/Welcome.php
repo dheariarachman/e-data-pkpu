@@ -39,7 +39,9 @@ class Welcome extends MY_Controller
             'getJson'       => site_url( $this->_module . '/getDataNasabah' ),
             'checkDetail'   => site_url( $this->_module . '/checkDetail' ),
             'print_pdf'     => site_url( $this->_module . '/printToPdf' ),
+            'print_pdf_non' => site_url( $this->_module . '/printToPdfNon' ),
             'print_excel'   => site_url( $this->_module . '/printToExcel' ),
+            'print_excel_non'   => site_url( $this->_module . '/printToExcelNon' ),
             'getSum'        => site_url( $this->_module . '/getSum' ),
             'getSumTotal'   => site_url( $this->_module . '/getSumTotal'),
             'getSumPerToday'            => site_url( $this->_module . '/getSumPerToday' ),
@@ -103,7 +105,40 @@ class Welcome extends MY_Controller
             'data' => $queryTable
         );
         $tablePdf = $this->load->view('layouts/pdf', $data, true);
-        return master::cetak($tablePdf, 'L');
+        $title      = 'Daftar Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        return master::cetak($tablePdf, 'L', $title);
+    }
+
+    public function printToPdfNon()
+    {
+        $queryTable = $this->master_model->getAll('m_data_perusahaan', 'numbering');
+        $data = array(
+            'data' => $queryTable
+        );
+        $tablePdf = $this->load->view('layouts/pdf_perusahaan', $data, true);
+        $title      = 'Daftar Non Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        return master::cetak($tablePdf, 'L', $title);
+    }
+
+    public function printToExcelNon()
+    {
+        $dataQuery  = array();
+        $title      = 'Daftar Non Nasabah PT. Solusi Balad Lumampah ( Dalam PKPU )';
+        $query      = $this->master_model->getAll('m_data_perusahaan', 'numbering', 'numbering, instansi, name, address, power_of_attorney_detail, amount')->result();
+        foreach ($query as $key => $value) {
+            $dataQuery[$key] = array(
+                'A' => $value->numbering,
+                'B' => $value->instansi,
+                'C' => $value->address,
+                'D' => $value->name,
+                'E' => $value->power_of_attorney_detail,
+                'F' => $value->amount,
+            );
+        }        
+        
+        $dataTitle      = Excel::setExcelTitle(array(['No. ', 8], ['Instansi', 15], ['Alamat', 18], ['PIC', 20], ['Kuasa', 18], ['Total Tagihan', 20]));
+        $excelValue     = Excel::setExcelValue($dataQuery, 'horizontal_center|vertical_center', true);
+        return Excel::exportExcel($title, $dataTitle, $excelValue);
     }
 
     public function printToExcel()

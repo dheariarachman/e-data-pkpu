@@ -254,8 +254,8 @@ class master
         return $CI->master_model->save($data, 'log_activity');
     }
 
-    public static function cetak($html = '', $orientation = '')
+    public static function cetak($html = '', $orientation = '', $title = '')
     {
-        mpdf::print_pdf($html, $orientation);
+        mpdf::print_pdf($html, $orientation, $title);
     }    
 }

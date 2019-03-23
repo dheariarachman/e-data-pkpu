@@ -127,8 +127,8 @@
                                 <div class="text-md font-weight-bold text-primary text-uppercase mb-1"><span id="jamaahNon"></span> Non Jamaah</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Total Piutang</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <!-- <a class="btn btn-success btn-icon-split" style="margin: 3px;" href="<?php // echo $print_excel; ?>" target="_blank"> -->
-                                    <a class="btn btn-success btn-icon-split" style="margin: 3px;" onclick="fnDalamPerbaikan()">
+                                    <a class="btn btn-success btn-icon-split" style="margin: 3px;" href="<?php echo $print_excel_non; ?>" target="_blank">
+                                    <!-- <a class="btn btn-success btn-icon-split" style="margin: 3px;" onclick="fnDalamPerbaikan()"> -->
                                         <span class="icon text-white-50">
                                             <i class="fas fa-file-excel"></i>
                                         </span>
@@ -137,8 +137,8 @@
                                         </span>
                                     </a>
 
-                                    <!-- <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php // echo $print_pdf; ?>" target="_blank"> -->
-                                    <a class="btn btn-danger btn-icon-split" style="margin: 3px;" onclick="fnDalamPerbaikan()">
+                                    <a class="btn btn-danger btn-icon-split" style="margin: 3px;" href="<?php echo $print_pdf_non; ?>" target="_blank">
+                                    <!-- <a class="btn btn-danger btn-icon-split" style="margin: 3px;" onclick="fnDalamPerbaikan()"> -->
                                         <span class="icon text-white-50">
                                             <i class="fas fa-file-pdf"></i>
                                         </span>
