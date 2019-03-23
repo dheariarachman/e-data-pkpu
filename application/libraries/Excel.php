@@ -37,6 +37,8 @@ class Excel {
 
     public static function exportExcel($title = '', $dataTitle = array(), $dataQuery = array())
     {
+        set_time_limit(0);
+        ini_set("memory_limit", "-1");
         $col = 2;
         $spreadsheet = new Spreadsheet();
         $spreadsheet->getActiveSheet()->setTitle('Sheet 1');
