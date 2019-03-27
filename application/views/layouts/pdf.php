@@ -15,11 +15,12 @@
 <table align="center" border="1" style="border-collapse: collapse;" width="100%">
     <tr>
         <th width="5%">No. Urut</th>
-        <th width="11%">ID Jamaah</th>
-        <th width="20%">Nama</th>
-        <th width="22%">Alamat</th>
-        <th width="20%">Kuasa</th>
-        <th width="22%" colspan="2">Total Tagihan</th>
+        <th width="10%">ID Jamaah</th>
+        <th width="15%">Nama</th>
+        <th width="20%">Alamat</th>
+        <th width="13%">Telepon</th>
+        <th width="17%">Kuasa</th>
+        <th width="20%" colspan="2">Total Tagihan</th>
     </tr>
     <?php $no = 1; $sumAmount = 0;?>
     <?php foreach ( $data->result() as $key => $value ): ?>
@@ -28,6 +29,7 @@
         <td align="left" style="padding: 4px;"><?php echo $value->id_jamaah; ?></td>
         <td align="left" style="padding: 4px;"><?php echo $value->customer; ?></td>
         <td align="left" style="padding: 4px;"><?php echo $value->c_address; ?></td>
+        <td align="center" style="padding: 4px;"><?php echo $value->phone_number; ?></td>
         <td align="<?php echo (empty($value->power_of_attorney_detail)) ? 'center' : 'left'; ?>" style="padding: 4px;"><?php echo (empty($value->power_of_attorney_detail)) ? '-' : $value->power_of_attorney_detail; ?></td>
         <td style="padding: 4px; border-right: 0px; " width="4%";>
             Rp.
@@ -39,7 +41,7 @@
     <?php $sumAmount += $value->amount; $no++; ?>
     <?php endforeach; ?>
     <tr>
-        <td colspan="5">Total</td>
+        <td colspan="6">Total</td>
         <td style="padding: 4px; border-right: 0px; " width="4%";>
             Rp.
         </td>

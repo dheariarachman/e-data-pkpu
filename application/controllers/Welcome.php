@@ -124,19 +124,20 @@ class Welcome extends MY_Controller
     {
         $dataQuery  = array();
         $title      = 'Daftar Non Jamaah PT. Solusi Balad Lumampah ( Dalam PKPU )';
-        $query      = $this->master_model->getAll('m_data_perusahaan', 'numbering', 'numbering, instansi, name, address, power_of_attorney_detail, amount')->result();
+        $query      = $this->master_model->getAll('m_data_perusahaan', 'numbering', 'numbering, instansi, name, address, phone_number, power_of_attorney_detail, amount')->result();
         foreach ($query as $key => $value) {
             $dataQuery[$key] = array(
                 'A' => $value->numbering,
                 'B' => $value->instansi,
                 'C' => $value->address,
                 'D' => $value->name,
-                'E' => $value->power_of_attorney_detail,
-                'F' => $value->amount,
+                'E' => $value->phone_number,
+                'F' => $value->power_of_attorney_detail,
+                'G' => $value->amount,
             );
         }        
         
-        $dataTitle      = Excel::setExcelTitle(array(['No. ', 8], ['Instansi', 15], ['Alamat', 18], ['PIC', 20], ['Kuasa', 18], ['Total Tagihan', 20]));
+        $dataTitle      = Excel::setExcelTitle(array(['No. ', 8], ['Instansi', 15], ['Alamat', 18], ['PIC', 20], ['Telepon', 20], ['Kuasa', 18], ['Total Tagihan', 20]));
         $excelValue     = Excel::setExcelValue($dataQuery, 'horizontal_center|vertical_center', true);
         return Excel::exportExcel($title, $dataTitle, $excelValue);
     }
@@ -145,19 +146,20 @@ class Welcome extends MY_Controller
     {
         $dataQuery  = array();
         $title      = 'Daftar Jamaah PT. Solusi Balad Lumampah ( Dalam PKPU )';
-        $query      = $this->master_model->getAll('m_data', 'numbering', 'numbering, id_jamaah, customer, c_address, power_of_attorney_detail,amount')->result();
+        $query      = $this->master_model->getAll('m_data', 'numbering', 'numbering, id_jamaah, customer, c_address, phone_number, power_of_attorney_detail,amount')->result();
         foreach ($query as $key => $value) {
             $dataQuery[$key] = array(
                 'A' => $value->numbering,
                 'B' => $value->id_jamaah,
                 'C' => $value->customer,
                 'D' => $value->c_address,
-                'E' => $value->power_of_attorney_detail,
-                'F' => $value->amount,
+                'E' => $value->phone_number,
+                'F' => $value->power_of_attorney_detail,
+                'G' => $value->amount,
             );
         }        
         
-        $dataTitle      = Excel::setExcelTitle(array(['No. Urut', 8], ['ID. Jamaah', 15], ['Nama', 18], ['Alamat', 20], ['Kuasa', 18], ['Total Tagihan', 20]));
+        $dataTitle      = Excel::setExcelTitle(array(['No. Urut', 8], ['ID. Jamaah', 15], ['Nama', 18], ['Alamat', 20], ['Telepon', 20], ['Kuasa', 18], ['Total Tagihan', 20]));
         $excelValue     = Excel::setExcelValue($dataQuery, 'horizontal_center|vertical_center', true);
         return Excel::exportExcel($title, $dataTitle, $excelValue);
     }

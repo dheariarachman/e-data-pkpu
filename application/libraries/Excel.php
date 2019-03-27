@@ -102,7 +102,7 @@ class Excel {
                 $spreadsheet->getActiveSheet()->setCellValue($cell, $valueVal[0]);                
                 $spreadsheet->getActiveSheet()->getStyle($cell)->getAlignment()->setWrapText($valueVal[2]);
                 $spreadsheet->getActiveSheet()->getStyle($cell)->applyFromArray($styleBorderThin);
-                if($keyVal == 'F') {                    
+                if($keyVal == 'G') {                    
                     $spreadsheet->getActiveSheet()->getStyle($cell)->getNumberFormat()->setFormatCode('#,##0.00');
                     $spreadsheet->getActiveSheet()->getStyle($cell)->applyFromArray($styleAlignmenValueRight);
                     $summary += $valueVal[0];
@@ -116,14 +116,14 @@ class Excel {
         
         $footer = $col+2;
         $spreadsheet->getActiveSheet()->getRowDimension($footer)->setRowHeight(25);        
-        $spreadsheet->getActiveSheet()->mergeCells('A'.$footer.':E'.$footer.'');
+        $spreadsheet->getActiveSheet()->mergeCells('A'.$footer.':F'.$footer.'');
         $spreadsheet->getActiveSheet()->setCellValue('A'.$footer, 'TOTAL');
         $spreadsheet->getActiveSheet()->getStyle('A'.$footer)->getFont()->setBold(true);
         $spreadsheet->getActiveSheet()->getStyle('A'.$footer)->applyFromArray($styleAlignmenValueCenter);
-        $spreadsheet->getActiveSheet()->setCellValue('F'.$footer, $summary);
-        $spreadsheet->getActiveSheet()->getStyle('F'.$footer)->getFont()->setBold(true);
-        $spreadsheet->getActiveSheet()->getStyle('F'.$footer)->applyFromArray($styleAlignmenValueRight);
-        $spreadsheet->getActiveSheet()->getStyle('F'.$footer)->getNumberFormat()->setFormatCode('#,##0.00');
+        $spreadsheet->getActiveSheet()->setCellValue('G'.$footer, $summary);
+        $spreadsheet->getActiveSheet()->getStyle('G'.$footer)->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getStyle('G'.$footer)->applyFromArray($styleAlignmenValueRight);
+        $spreadsheet->getActiveSheet()->getStyle('G'.$footer)->getNumberFormat()->setFormatCode('#,##0.00');
 
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'.$title.'.xlsx"');
